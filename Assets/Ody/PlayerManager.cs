@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Variales")]
     public Rigidbody rb;
+    public Transform model;
 
     [Header("Movement")]
     public float speed = 5f;
