@@ -32,4 +32,15 @@ public class PlayerManager : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.tag == "Walljump")
+        {
+            Automata.Instance.ChangeState("WalljumpState");
+        }
+    }
+
+
 }

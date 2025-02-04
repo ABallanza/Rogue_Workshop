@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class MovementState : MonoBehaviour
 {
     public PlayerInput playerInput;
 
     [Header("Rotation")]
-    [SerializeField] private bool goingLeft;
+    [HideInInspector] public bool goingLeft;
     [SerializeField] private float rotationSpeed = 0.5f;
 
     private Vector2 movInput;
     private Rigidbody rb;
+
+
+    public float rvb;
 
     private void OnEnable()
     {
@@ -45,7 +49,7 @@ public class MovementState : MonoBehaviour
     {
         if (rb.linearVelocity.y > 0)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            rvb = rb.linearVelocity.y;
         }
     }
 
@@ -78,7 +82,19 @@ public class MovementState : MonoBehaviour
     {
         if (rb)
         {
-            rb.linearVelocity = new Vector3(movInput.x, rb.linearVelocity.y, movInput.y);
+            if(rvb < 0.1f)
+            {
+                rb.linearVelocity = new Vector3(movInput.x, rb.linearVelocity.y, movInput.y);
+            }
+            else
+            {
+                rb.linearVelocity = new Vector3(movInput.x, rvb, movInput.y);
+            }
+        }
+
+        if(rvb > 0)
+        {
+            rvb -= 1f;
         }
     }
 }
