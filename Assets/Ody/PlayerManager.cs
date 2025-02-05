@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Movement")]
     public float speed = 5f;
     public float jumpForce = 5f;
+    public bool canMove = true;
 
     [Header("Ground Settings")]
     public bool isGrounded;

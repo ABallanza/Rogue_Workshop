@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -12,6 +13,8 @@ public class MovementState : MonoBehaviour
     private Vector2 movInput;
     private Rigidbody rb;
 
+    [SerializeField] private Animator anims;
+
 
     public float rvb;
 
@@ -22,6 +25,8 @@ public class MovementState : MonoBehaviour
 
         playerInput.Player.Jump.performed += ctx => Jump();
         playerInput.Player.Jump.canceled += ctx => EndJump();
+
+        playerInput.Player.Attack.performed += ctx => StartFight();
     }
 
     private void OnDisable()
@@ -30,11 +35,18 @@ public class MovementState : MonoBehaviour
 
         playerInput.Player.Jump.performed -= ctx => Jump();
         playerInput.Player.Jump.canceled -= ctx => EndJump();
+
+        playerInput.Player.Attack.performed -= ctx => StartFight();
     }
 
     private void Start()
     {
         rb = PlayerManager.Instance.rb;
+    }
+
+    void StartFight()
+    {
+        Automata.Instance.ChangeState("FightingState");
     }
 
     void Jump()
@@ -44,6 +56,10 @@ public class MovementState : MonoBehaviour
             rb.linearVelocity = Vector3.up * PlayerManager.Instance.jumpForce;
         }
     }
+
+
+
+
 
     void EndJump()
     {
@@ -55,6 +71,9 @@ public class MovementState : MonoBehaviour
 
     private void Update()
     {
+
+        anims.SetBool("isWalking", rb.linearVelocity.magnitude > 0);
+
         movInput = playerInput.Player.Move.ReadValue<Vector2>() * PlayerManager.Instance.speed;
         if(movInput.x < 0)
         {
@@ -65,12 +84,15 @@ public class MovementState : MonoBehaviour
             goingLeft = false;
         }
 
-        RotateModel();
+        if(rb.linearVelocity.x != 0)
+        {
+            RotateModel();
+        }
     }
 
     void RotateModel()
     {
-        Quaternion targetRotation = goingLeft
+        Quaternion targetRotation = rb.linearVelocity.x < 0
             ? Quaternion.Euler(0, 180, 0) // Face left
             : Quaternion.Euler(0, 0, 0);  // Face right
 
@@ -80,7 +102,7 @@ public class MovementState : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (rb)
+        if (rb && PlayerManager.Instance.canMove)
         {
             if(rvb < 0.1f)
             {
