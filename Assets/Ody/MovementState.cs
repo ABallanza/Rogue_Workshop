@@ -6,10 +6,6 @@ public class MovementState : MonoBehaviour
 {
     public PlayerInput playerInput;
 
-    [Header("Rotation")]
-    [HideInInspector] public bool goingLeft;
-    [SerializeField] private float rotationSpeed = 0.5f;
-
     private Vector2 movInput;
     private Rigidbody rb;
 
@@ -75,29 +71,6 @@ public class MovementState : MonoBehaviour
         anims.SetBool("isWalking", rb.linearVelocity.magnitude > 0);
 
         movInput = playerInput.Player.Move.ReadValue<Vector2>() * PlayerManager.Instance.speed;
-        if(movInput.x < 0)
-        {
-            goingLeft = true;
-        }
-        else if(movInput.x > 0)
-        {
-            goingLeft = false;
-        }
-
-        if(rb.linearVelocity.x != 0)
-        {
-            RotateModel();
-        }
-    }
-
-    void RotateModel()
-    {
-        Quaternion targetRotation = rb.linearVelocity.x < 0
-            ? Quaternion.Euler(0, 180, 0) // Face left
-            : Quaternion.Euler(0, 0, 0);  // Face right
-
-        PlayerManager.Instance.model.rotation = Quaternion.Lerp(
-            PlayerManager.Instance.model.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()

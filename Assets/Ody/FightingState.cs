@@ -20,8 +20,6 @@ public class FightingState : MonoBehaviour
 
         anims.SetBool("isFighting", true);
         anims.SetTrigger("Fight");
-
-        goingLeft = ms.goingLeft;
     }
 
     private void OnDisable()
@@ -46,34 +44,7 @@ public class FightingState : MonoBehaviour
         Automata.Instance.ChangeState("MovementState");
     }
 
-    Vector2 movInput;
-    bool goingLeft;
-    float rotationSpeed = 50f;
 
-    private void Update()
-    {
-        movInput = playerInput.Player.Move.ReadValue<Vector2>() * PlayerManager.Instance.speed;
-        if (movInput.x < 0)
-        {
-            goingLeft = true;
-        }
-        else if (movInput.x > 0)
-        {
-            goingLeft = false;
-        }
-
-        RotateModel();
-    }
-
-    void RotateModel()
-    {
-        Quaternion targetRotation = goingLeft
-            ? Quaternion.Euler(0, 180, 0) // Face left
-            : Quaternion.Euler(0, 0, 0);  // Face right
-
-        PlayerManager.Instance.model.rotation = Quaternion.Lerp(
-            PlayerManager.Instance.model.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-    }
 
 
 
