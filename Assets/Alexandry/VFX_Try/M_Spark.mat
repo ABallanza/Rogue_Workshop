@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_try_01
+  m_Name: M_Spark
   m_Shader: {fileID: -6465566751694194690, guid: 4b2dd9d4f45f8a94b8bddd2f0ee6c31e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,11 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Alpha:
-        m_Texture: {fileID: 2800000, guid: b8dbe7e99bf559f47b07f81989ab8f84, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_d83aad5c05594ca8b4cb773d34c39507_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 1898d8d6721d6d146914273eecb421e4, type: 3}
+        m_Texture: {fileID: 2800000, guid: f278b970618c34e42b89c87c0cf4dc46, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -46,13 +42,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Emission: 10
-    - _Emissive: 50
+    - _Emission: 1
+    - _Emissive: 1.54
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0.735849, g: 0, b: 0, a: 0}
-    - _Color_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3031841706976345722
