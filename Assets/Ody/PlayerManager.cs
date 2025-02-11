@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -22,6 +24,46 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundDistance = 0.2f;
     [SerializeField] private Collider groundCol;
+
+    [Header("Life Settings")]
+    [SerializeField] private int life;
+    [SerializeField] private GameObject heart;
+    [SerializeField] private Transform lifeHolder;
+    private List<GameObject> heartList = new List<GameObject>();
+
+    public void AddLife(int number)
+    {
+        for (int i = 0; i < number; i++)
+        {
+            GameObject _heart = Instantiate(heart, lifeHolder);
+            _heart.transform.SetParent(lifeHolder);
+            if (life % 2 != 0)
+            {
+                _heart.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            heartList.Add(_heart);
+            life += 1;
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        for (int i = 0; i < damage; i++)
+        {
+            if (life > 0 && heartList.Count > 0)
+            {
+                GameObject lastHeart = heartList[heartList.Count - 1];
+                heartList.RemoveAt(heartList.Count - 1);
+                Destroy(lastHeart);
+                life -= 1;
+            }
+        }
+    }
+
+    private void Start()
+    {
+        AddLife(5);
+    }
 
     private void OnEnable()
     {
@@ -55,9 +97,6 @@ public class PlayerManager : MonoBehaviour
         }
 
         RotateModel();
-
-        
-
     }
 
     private void FixedUpdate()
