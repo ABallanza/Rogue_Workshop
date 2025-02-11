@@ -1,9 +1,12 @@
 using NUnit.Framework.Constraints;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.Android.AndroidGame;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [SerializeField] private EnemyAutomata automata;
+
     [SerializeField] private Rigidbody rb;
 
     [SerializeField] private Transform model;
@@ -16,6 +19,18 @@ public class EnemyMovement : MonoBehaviour
         CheckForward();
 
         model.rotation = Quaternion.Euler(0, rot, 0);
+    }
+
+
+    private void Update()
+    {
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").transform.position) < 15)
+        {
+            if(Mathf.Abs(transform.position.y - GameObject.Find("Player").transform.position.y) < 1)
+            {
+                automata.ChangeState("FightingState");
+            }
+        }
     }
 
 

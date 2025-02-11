@@ -52,7 +52,14 @@ public class EnemyDamageState : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
 
-        automata.ChangeState("MovementState");
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").transform.position) < 15)
+        {
+            automata.ChangeState("FightingState");
+        }
+        else
+        {
+            automata.ChangeState("MovementState");
+        }
     }
 
 }

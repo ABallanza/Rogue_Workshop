@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundDistance = 0.2f;
+    [SerializeField] private Collider groundCol;
 
     private void OnEnable()
     {
@@ -46,7 +47,17 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        groundCol.enabled = isGrounded;
+
+        if (isGrounded && canMove)
+        {
+            groundCol.enabled = !(playerInput.Player.Move.ReadValue<Vector2>().y < 0);
+        }
+
         RotateModel();
+
+        
+
     }
 
     private void FixedUpdate()

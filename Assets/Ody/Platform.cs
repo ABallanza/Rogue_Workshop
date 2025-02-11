@@ -7,13 +7,13 @@ public class Platform : MonoBehaviour
     private Transform player;
 
 
+    [Header("Layers")]
+    public LayerMask defaultLayer;
+    public LayerMask ingoreLayer;
+
     private void Start()
     {
         player = GameObject.Find("Player").transform;
     }
 
-    private void Update()
-    {
-        col.enabled = player.position.y > transform.position.y;
-    }
 }
