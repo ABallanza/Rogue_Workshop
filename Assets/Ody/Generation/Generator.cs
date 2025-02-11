@@ -37,6 +37,9 @@ public class Generator : MonoBehaviour
     public GameObject[] normalChunks;
     public GameObject[] goUpChunks;
 
+    [Header("Door Chunks")]
+    public GameObject doors;
+
 
     public static Generator Instance;
 
@@ -50,9 +53,11 @@ public class Generator : MonoBehaviour
         StartGeneration();
     }
 
+    int s;
 
     public void Reset(string whatDoor)
     {
+        s = 0;
         doorToTpPlayer = whatDoor;
 
         for (int i = transform.childCount - 1; i >= 0; i--)
@@ -72,7 +77,15 @@ public class Generator : MonoBehaviour
 
         for(int i = 0; i < columns; i++)
         {
-            space.y = Random.Range(-15, 15);
+            int t = Random.Range(-15, 15);
+            if(t > 0)
+            {
+                space.y = 0;
+            }
+            else
+            {
+                space.y = spacing / 2 * ( Random.Range(1, 4));
+            }
             for (int j = 0; j < roomsPerColumn; j++)
             {
                 if(needToSpawnPlayer && !spawnedPlayer)
@@ -83,7 +96,8 @@ public class Generator : MonoBehaviour
 
                 GameObject room = Instantiate(Wall, space, Quaternion.identity);
                 room.transform.SetParent(transform);
-
+                room.GetComponent<ChunkSpawner>().index = s;
+                s++;
                 
 
                 totalRooms--;

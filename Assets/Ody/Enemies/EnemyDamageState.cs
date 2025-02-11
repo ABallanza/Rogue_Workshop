@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
-using static UnityEngine.Android.AndroidGame;
 
-public class DamageState : MonoBehaviour
+public class EnemyDamageState : MonoBehaviour
 {
     public EnemyAutomata automata;
 
@@ -18,8 +17,12 @@ public class DamageState : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform model;
 
+    [SerializeField] private GameObject damageEffect;
+
     private void OnEnable()
     {
+        Instantiate(damageEffect, transform.position, transform.rotation);
+
         if (mats != null)
         {
             mats.Clear();
@@ -29,8 +32,6 @@ public class DamageState : MonoBehaviour
         {
             mats.Add(m.material);
         }
-
-        rb.linearVelocity = model.transform.right * 5f;    
 
         StartCoroutine(TakeDamage_C());
     }

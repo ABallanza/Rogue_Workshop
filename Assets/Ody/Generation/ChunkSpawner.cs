@@ -7,6 +7,7 @@ public class ChunkSpawner : MonoBehaviour
     public enum ChunkType { ground, air, goUp }
     public ChunkType chunkType;
 
+    public int index;
 
     private void Start()
     {

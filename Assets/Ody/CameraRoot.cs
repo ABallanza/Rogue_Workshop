@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CameraRoot : MonoBehaviour
 {
@@ -6,6 +7,20 @@ public class CameraRoot : MonoBehaviour
     [SerializeField] private float sens;
 
 
+    [SerializeField] private Animator anims;
+
+
+    public static CameraRoot Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void ShakeCam()
+    {
+        anims.Play("Shake");
+    }
 
     private void LateUpdate()
     {
