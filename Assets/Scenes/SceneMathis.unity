@@ -283,6 +283,7 @@ MonoBehaviour:
   mats: []
   rb: {fileID: 1319140846}
   model: {fileID: 37881113}
+  damageEffect: {fileID: 0}
 --- !u!1 &212998067
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +425,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 220435613}
+  defaultLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ingoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &220435613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1605,6 +1612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310569942cba3a6478e09fb6808ce0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automata: {fileID: 0}
+  rb: {fileID: 0}
+  model: {fileID: 0}
 --- !u!4 &999612456
 Transform:
   m_ObjectHideFlags: 0
@@ -1825,6 +1835,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 1127140326}
+  defaultLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ingoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &1127140326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1947,6 +1963,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 1198791915}
+  defaultLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ingoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &1198791915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2225,6 +2247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   automata: {fileID: 815883341}
+  life: 100
 --- !u!54 &1319140846
 Rigidbody:
   m_ObjectHideFlags: 0
