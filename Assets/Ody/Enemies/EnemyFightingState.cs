@@ -28,7 +28,6 @@ public class EnemyFightingState : MonoBehaviour
         if (player == null) return;
 
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        print(directionToPlayer);
 
         if(directionToPlayer.x > 0)
         {

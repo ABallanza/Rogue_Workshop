@@ -37,7 +37,6 @@ public class EnemyMovement : MonoBehaviour
 
     public void CheckForward()
     {
-        print(CanGoForward());
         if (CanGoForward())
         {
             rb.linearVelocity = model.right * -5;

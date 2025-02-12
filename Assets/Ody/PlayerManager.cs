@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using static UnityEngine.Android.AndroidGame;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -45,6 +47,18 @@ public class PlayerManager : MonoBehaviour
             life += 1;
         }
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Hitbox_Enemy")
+        {
+            Automata.Instance.ChangeState("DamageState");
+            rb.linearVelocity = (transform.position - other.transform.position) * 15;
+            TakeDamage(1);
+        }
+    }
+
 
     public void TakeDamage(int damage)
     {

@@ -33,47 +33,56 @@ public class ChunkManager : MonoBehaviour
 
     public List<GameObject> roomsAvailable = new List<GameObject>();
 
-    public void SpawnChunk(List<GameObject> blacklist = null)
+    public void SpawnChunk(List<GameObject> blacklist = null, bool isDoor = false)
     {
         Generator gen = Generator.Instance;
-        roomsAvailable.Clear();
-        
-        foreach (string key in gen.roomsDictionary.Keys)
+
+        if (isDoor)
         {
-            if (openSides[key])
-            {
-                roomsAvailable = roomsAvailable.Union(gen.roomsDictionary[key]).ToList();
-            }
+
         }
-        
-        if (blacklist != null)
+        else
         {
-            foreach (GameObject gameObject in blacklist)
+            roomsAvailable.Clear();
+
+            foreach (string key in gen.roomsDictionary.Keys)
             {
-                if (roomsAvailable.Contains(gameObject))
+                if (openSides[key])
                 {
-                    roomsAvailable.Remove(gameObject);
+                    roomsAvailable = roomsAvailable.Union(gen.roomsDictionary[key]).ToList();
                 }
             }
-        }
-        else
-        {
-            blacklist = new List<GameObject>();
-        }
-        
-        GameObject newRoom = roomsAvailable[Random.Range(0, roomsAvailable.Count)]; 
 
-        bool doesntFit = !gen.AddChunk(newRoom.GetComponent<Room>(), gen.Chunks.IndexOf(this));
+            if (blacklist != null)
+            {
+                foreach (GameObject gameObject in blacklist)
+                {
+                    if (roomsAvailable.Contains(gameObject))
+                    {
+                        roomsAvailable.Remove(gameObject);
+                    }
+                }
+            }
+            else
+            {
+                blacklist = new List<GameObject>();
+            }
 
-        if (doesntFit)
-        {
-            blacklist.Add(newRoom);
-            SpawnChunk(blacklist);
+            GameObject newRoom = roomsAvailable[Random.Range(0, roomsAvailable.Count)];
+
+            bool doesntFit = !gen.AddChunk(newRoom.GetComponent<Room>(), gen.Chunks.IndexOf(this));
+
+            if (doesntFit)
+            {
+                blacklist.Add(newRoom);
+                SpawnChunk(blacklist);
+            }
+            else
+            {
+                Instantiate(newRoom, transform.position, Quaternion.identity);
+            }
         }
-        else
-        {
-            Instantiate(newRoom, transform.position, Quaternion.identity);
-        }
+
     }
 
     

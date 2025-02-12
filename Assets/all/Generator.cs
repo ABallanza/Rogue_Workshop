@@ -31,16 +31,28 @@ public class Generator : MonoBehaviour
 
     [Header("Chunks")]
     public GameObject[] rooms;
+    public GameObject[] doorRooms;
+
 
 
     [Header("RoomsList")]
     public Dictionary<string, List<GameObject>> roomsDictionary = new Dictionary<string, List<GameObject>>();
+
+    [Header("Door Settings")]
+    public List<int> doorIndexes = new List<int>();
+    public int totalRoomsIndex;
 
 
     private void Awake()
     {
         Instance = this;
         CreateLists();
+        totalRoomsIndex = columns * chunksPerColumns;
+        doorIndexes.Add(Random.Range(0, chunksPerColumns));
+        doorIndexes.Add(Random.Range((totalRoomsIndex-chunksPerColumns), totalRoomsIndex));
+        doorIndexes.Add(chunksPerColumns * (Random.Range(1, columns-1)));
+        doorIndexes.Add(chunksPerColumns * (Random.Range(2, columns)) - 1);
+
     }
 
 
@@ -57,6 +69,7 @@ public class Generator : MonoBehaviour
             for(int j = 0; j < chunksPerColumns; j++)
             {
                 GameObject bs = Instantiate(baseChunk, pos, Quaternion.identity);
+
                 bs.transform.SetParent(transform);
                 Chunks.Add(bs.GetComponent<ChunkManager>());
                 pos.y += spacing;
@@ -77,9 +90,20 @@ public class Generator : MonoBehaviour
             pos.x += spacing;
         }
 
+        int v = 0;
         foreach (ChunkManager chunk in Chunks)
         {
-            chunk.SpawnChunk();
+            if (doorIndexes.Contains(v))
+            {
+                chunk.SpawnChunk(null, true);
+            }
+            else
+            {
+
+                chunk.SpawnChunk();
+            }
+
+            v++;
         }
     }
 

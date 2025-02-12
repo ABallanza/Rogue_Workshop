@@ -457,19 +457,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseChunk: {fileID: 6471845152830019238, guid: 50a51d48246b90548b267b7030842324, type: 3}
   Chunks: []
-  columns: 30
-  chunksPerColumns: 30
+  columns: 8
+  chunksPerColumns: 4
   spacing: 16
   isOn: 1
   rooms:
-  - {fileID: 7915158134385224969, guid: a9cc6230ccc66324b88ef4599adf3596, type: 3}
-  - {fileID: 7915158134385224969, guid: fd44777a71b5ff44c91068819abb7bd1, type: 3}
   - {fileID: 7915158134385224969, guid: 92d61680e5ad66f4a989df5036658c97, type: 3}
   - {fileID: 7915158134385224969, guid: e289ac81ae8393e469012f126defa933, type: 3}
   - {fileID: 7915158134385224969, guid: eb858cb92973c32469fb9052a5751d9a, type: 3}
   - {fileID: 7915158134385224969, guid: b3cc32e4360d565409349d9d8fdc3728, type: 3}
   - {fileID: 7915158134385224969, guid: 3c1d31b1ad843344fbfd256e861647de, type: 3}
   - {fileID: 7915158134385224969, guid: 9691e6ad4c0e8264ead5dbe376379140, type: 3}
+  doorRooms: []
+  doorIndexes: 
+  totalRoomsIndex: 0
   graphCheck: []
 --- !u!4 &1712386339
 Transform:
