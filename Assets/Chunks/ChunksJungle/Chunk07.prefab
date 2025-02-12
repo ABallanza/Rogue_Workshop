@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550999069687479901}
+  - component: {fileID: 3714045391453215033}
   m_Layer: 0
   m_Name: Chunk07
   m_TagString: Untagged
@@ -44,6 +45,24 @@ Transform:
   - {fileID: 8682977071833935976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3714045391453215033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915158134385224969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53fefbe816a6a4649a95ac4b9d847c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Up: 1
+  Down: 0
+  LeftDown: 1
+  RightDown: 0
+  LeftUp: 1
+  RightUp: 0
 --- !u!1001 &144544989413968172
 PrefabInstance:
   m_ObjectHideFlags: 0
