@@ -8,6 +8,11 @@ public class DashState : MonoBehaviour
     public Collider col;
 
 
+    private void Update()
+    {
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    }
+
     private void OnEnable()
     {
         PlayerManager.Instance.GetComponent<Collider>().excludeLayers = LayerMask.GetMask("Enemy");

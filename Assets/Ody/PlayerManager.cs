@@ -195,14 +195,31 @@ public class PlayerManager : MonoBehaviour
         if (!isGrounded)
         {
             RaycastHit hit;
-            if(Physics.Raycast(vaultPos.position, Vector3.down, out hit, 0.5f))
+            if (Physics.Raycast(vaultPos.position, Vector3.down, out hit, 0.5f))
             {
-                if(hit.transform != null && hit.transform.tag == "Ground")
+                if (hit.transform != null && hit.transform.CompareTag("Ground"))
                 {
-                    transform.position = new Vector3(hit.point.x, hit.point.y + 0.7f, hit.point.z);
+                    StartCoroutine(SmoothVault(hit.point));
                 }
             }
         }
+    }
+
+    IEnumerator SmoothVault(Vector3 targetPosition)
+    {
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = new Vector3(targetPosition.x, targetPosition.y + 0.7f, targetPosition.z);
+        float elapsedTime = 0f;
+        float duration = 0.25f;
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPosition;
     }
 
     private void FixedUpdate()
@@ -248,3 +265,4 @@ public class PlayerManager : MonoBehaviour
         }
     }
 }
+

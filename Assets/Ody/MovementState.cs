@@ -20,6 +20,8 @@ public class MovementState : MonoBehaviour
 
     private void OnEnable()
     {
+        canMoveTowardsWall = true;
+
         playerInput = new PlayerInput();
         playerInput.Enable();
 
