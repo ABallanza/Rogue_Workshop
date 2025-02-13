@@ -23,7 +23,7 @@ public class Ability : MonoBehaviour
     {
         PlayerManager.Instance.meleeDamage += meleeDamageBoost;
         PlayerManager.Instance.bulletDamage += bulletDamageBoost;
-        PlayerManager.Instance.fireRate += fireRateBoost;
+        PlayerManager.Instance.fireRate -= fireRateBoost;
         PlayerManager.Instance.speed += speedBoost;
         PlayerManager.Instance.AddLife(lifeBoost);
         PlayerManager.Instance.dashForce += dashForceBoost;
