@@ -36,6 +36,20 @@ public class PlayerManager : MonoBehaviour
     [Header("Stats")]
     public float meleeDamage = 5;
     public float bulletDamage = 5;
+    public float dashForce = 10f;
+
+    [Header("Dash")]
+    private bool canDash = true;
+    public float dashTime = 0.2f;
+    public float timeToDashAgain = 3f;
+
+    [Header("Gun Settings")]
+    public float fireRate = 0.5f;
+    public bool canShoot = true;
+
+
+    [Header("Vault Settings")]
+    public Transform vaultPos;
 
     public void AddLife(int number)
     {
@@ -50,6 +64,22 @@ public class PlayerManager : MonoBehaviour
             heartList.Add(_heart);
             life += 1;
         }
+    }
+
+    public void Dash()
+    {
+        if (canDash)
+        {
+            canDash = false;
+            Automata.Instance.ChangeState("DashState");
+            StartCoroutine(CanDashAgain());
+        }
+    }
+
+    IEnumerator CanDashAgain()
+    {
+        yield return new WaitForSeconds(timeToDashAgain);
+        canDash = true;
     }
 
 
@@ -156,6 +186,23 @@ public class PlayerManager : MonoBehaviour
         }
 
         RotateModel();
+
+        Vault();
+    }
+
+    void Vault()
+    {
+        if (!isGrounded)
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(vaultPos.position, Vector3.down, out hit, 0.5f))
+            {
+                if(hit.transform != null && hit.transform.tag == "Ground")
+                {
+                    transform.position = new Vector3(hit.point.x, hit.point.y + 0.7f, hit.point.z);
+                }
+            }
+        }
     }
 
     private void FixedUpdate()

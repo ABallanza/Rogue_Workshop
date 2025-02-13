@@ -17,6 +17,7 @@ public class FightingState : MonoBehaviour
         playerInput.Enable();
 
         playerInput.Player.Attack.performed += ctx => Attack();
+        playerInput.Player.Dash.performed += ctx => PlayerManager.Instance.Dash();
 
         anims.SetBool("isFighting", true);
         anims.SetTrigger("Fight");
@@ -27,6 +28,7 @@ public class FightingState : MonoBehaviour
         playerInput.Disable();
 
         playerInput.Player.Attack.performed -= ctx => Attack();
+        playerInput.Player.Dash.performed -= ctx => PlayerManager.Instance.Dash();
 
         anims.SetBool("isFighting", false);
     }

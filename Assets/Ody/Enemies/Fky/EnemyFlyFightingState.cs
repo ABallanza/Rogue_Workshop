@@ -14,6 +14,8 @@ public class EnemyFlyFightingState : MonoBehaviour
 
     public float distanceToStopFight;
 
+    private bool canFollow = true;
+
     private void OnEnable()
     {
         StartCoroutine(StartFight());
@@ -21,7 +23,10 @@ public class EnemyFlyFightingState : MonoBehaviour
     
     public void FixedUpdate()
     {
-        rb.linearVelocity = (GameObject.Find("Player").transform.position - transform.position).normalized * 8;
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").transform.position) > 0.5f && canFollow)
+        {
+            rb.linearVelocity = (GameObject.Find("Player").transform.position - transform.position).normalized * 8;
+        }
     }
 
     private void Update()
@@ -36,6 +41,9 @@ public class EnemyFlyFightingState : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenHits);
         anims.Play("Hit");
+        canFollow = false;
+        yield return new WaitForSeconds(1f);
+        canFollow = true;
         StartCoroutine(StartFight());
     }
 

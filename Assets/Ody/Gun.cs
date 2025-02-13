@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -56,6 +57,17 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(bullet, shootPoint.transform.position, shootPoint.transform.rotation);
+        if (PlayerManager.Instance.canShoot)
+        {
+            PlayerManager.Instance.canShoot = false;
+            StartCoroutine(Reload());
+            Instantiate(bullet, shootPoint.transform.position, shootPoint.transform.rotation);
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(PlayerManager.Instance.fireRate);
+        PlayerManager.Instance.canShoot = true;
     }
 }
