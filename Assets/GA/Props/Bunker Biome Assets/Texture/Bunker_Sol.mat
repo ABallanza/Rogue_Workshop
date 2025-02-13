@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 335e9818af2010e4b826eeca70ef0f5a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6762609da7ece1a4e99553b69d710c92, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -82,11 +82,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Side_Base_Color:
-        m_Texture: {fileID: 2800000, guid: 14fe145529b09314bb84280ccb7b097f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6762609da7ece1a4e99553b69d710c92, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Top_Base_Color:
+        m_Texture: {fileID: 2800000, guid: 14fe145529b09314bb84280ccb7b097f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Top_Normal:
+        m_Texture: {fileID: 2800000, guid: 335e9818af2010e4b826eeca70ef0f5a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -133,7 +141,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Tilling_Multiply: 0
+    - _Tilling_Multiply: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
