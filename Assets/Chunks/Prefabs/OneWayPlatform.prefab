@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 144514393205207188}
   - component: {fileID: 5745543664882140448}
   - component: {fileID: 6181677400374376122}
-  m_Layer: 0
+  - component: {fileID: 7443624307910514605}
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +109,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7443624307910514605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2398717497907304997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb85083aab4fda4ca812a7470718374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 6181677400374376122}
+  defaultLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ingoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &3465775335585479779
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,9 +137,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8827520649142532420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OneWayPlatform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

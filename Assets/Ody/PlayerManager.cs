@@ -33,6 +33,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform lifeHolder;
     private List<GameObject> heartList = new List<GameObject>();
 
+    [Header("Stats")]
+    public float meleeDamage = 5;
+    public float bulletDamage = 5;
+
     public void AddLife(int number)
     {
         for (int i = 0; i < number; i++)
@@ -112,7 +116,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        AddLife(5);
+        AddLife(10);
     }
 
     private void OnEnable()

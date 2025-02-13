@@ -9,8 +9,21 @@ public class Hitbox : MonoBehaviour
 
     public bool doFreeze = false;
 
+    public bool isProjectile = false;
 
     public float damage = 15f;
+
+    private void OnEnable()
+    {
+        if(!isProjectile)
+        {
+            damage = PlayerManager.Instance.meleeDamage;
+        }
+        else
+        {
+            damage = PlayerManager.Instance.bulletDamage;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

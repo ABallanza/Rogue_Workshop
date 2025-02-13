@@ -67,7 +67,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""27c5f898-bc57-4ee1-8800-db469aca5fe3"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -121,6 +121,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""LockMovement"",
                     ""type"": ""Button"",
                     ""id"": ""6d6079e4-8895-4e2f-8790-14ae79f73a12"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interagir"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a7fda31-aed7-4b6b-860c-a9a5720c219b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Options"",
+                    ""type"": ""Button"",
+                    ""id"": ""42836ffe-b6fe-4828-9385-07a6680a7820"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -532,6 +550,50 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LockMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""659d1b0d-88d8-4858-b70c-e90c7911cf63"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interagir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54205266-22a2-4488-a39d-25211ba7f257"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interagir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6700a2d-a557-4cac-a9b5-a3accb7a1f33"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Options"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8d3cb63-cd48-4e85-8f90-238212d0963f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Options"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1130,6 +1192,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_LockMovement = m_Player.FindAction("LockMovement", throwIfNotFound: true);
+        m_Player_Interagir = m_Player.FindAction("Interagir", throwIfNotFound: true);
+        m_Player_Options = m_Player.FindAction("Options", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1220,6 +1284,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_LockMovement;
+    private readonly InputAction m_Player_Interagir;
+    private readonly InputAction m_Player_Options;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1235,6 +1301,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @LockMovement => m_Wrapper.m_Player_LockMovement;
+        public InputAction @Interagir => m_Wrapper.m_Player_Interagir;
+        public InputAction @Options => m_Wrapper.m_Player_Options;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1277,6 +1345,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @LockMovement.started += instance.OnLockMovement;
             @LockMovement.performed += instance.OnLockMovement;
             @LockMovement.canceled += instance.OnLockMovement;
+            @Interagir.started += instance.OnInteragir;
+            @Interagir.performed += instance.OnInteragir;
+            @Interagir.canceled += instance.OnInteragir;
+            @Options.started += instance.OnOptions;
+            @Options.performed += instance.OnOptions;
+            @Options.canceled += instance.OnOptions;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1314,6 +1388,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @LockMovement.started -= instance.OnLockMovement;
             @LockMovement.performed -= instance.OnLockMovement;
             @LockMovement.canceled -= instance.OnLockMovement;
+            @Interagir.started -= instance.OnInteragir;
+            @Interagir.performed -= instance.OnInteragir;
+            @Interagir.canceled -= instance.OnInteragir;
+            @Options.started -= instance.OnOptions;
+            @Options.performed -= instance.OnOptions;
+            @Options.canceled -= instance.OnOptions;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1507,6 +1587,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnLockMovement(InputAction.CallbackContext context);
+        void OnInteragir(InputAction.CallbackContext context);
+        void OnOptions(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

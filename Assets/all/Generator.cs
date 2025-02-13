@@ -15,6 +15,12 @@ public class Generator : MonoBehaviour
 
     public List<ChunkManager> Chunks;
 
+    public GameObject walls;
+
+    [Header("Player")]
+    public bool spawnedPlayer = false;
+    public GameObject player;
+
     [Header("Columns Settings")]
     public int columns = 8;
     public int chunksPerColumns = 4;
@@ -42,6 +48,14 @@ public class Generator : MonoBehaviour
     public List<int> doorIndexes = new List<int>();
     public int totalRoomsIndex;
 
+    public GameObject outline;
+
+    [Header("Shop")]
+    public GameObject shop;
+
+
+    public bool startGenDirectly = true;
+
 
     private void Awake()
     {
@@ -56,19 +70,54 @@ public class Generator : MonoBehaviour
     }
 
 
+
+
+
     public void Start()
     {
-        GenerateChunks();
+        if (startGenDirectly)
+        {
+            GenerateChunks();
+        }
+    }
 
+    public void TestChunks()
+    {
+        GenerateChunks();
+    }
+
+    public void TestShop()
+    {
+        GenerateShop();
+    }
+
+    void GenerateShop()
+    {
+        Instantiate(shop, Vector3.zero, Quaternion.identity);
+        if (!spawnedPlayer)
+        {
+            Instantiate(player, Vector3.zero, Quaternion.identity);
+        }
+        else
+        {
+            GameObject.Find("Player").transform.position = Vector3.zero;
+        }
     }
 
     void GenerateChunks()
     {
+        Instantiate(walls, Vector3.zero, Quaternion.identity);
+
         for(int i = 0; i < columns; i++)
         {
             for(int j = 0; j < chunksPerColumns; j++)
             {
                 GameObject bs = Instantiate(baseChunk, pos, Quaternion.identity);
+                if (!spawnedPlayer)
+                {
+                    spawnedPlayer = true;
+                    Instantiate(player, new Vector3(pos.x + 8, pos.y + 8, pos.z), Quaternion.identity);
+                }
 
                 bs.transform.SetParent(transform);
                 Chunks.Add(bs.GetComponent<ChunkManager>());
@@ -102,7 +151,6 @@ public class Generator : MonoBehaviour
 
                 chunk.SpawnChunk();
             }
-
             v++;
         }
     }
