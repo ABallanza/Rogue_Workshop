@@ -63,7 +63,7 @@ public class EnemyMovement : MonoBehaviour
     {
         RaycastHit hit;
 
-        Vector3 RightAndABit = model.position + -model.right * 2f;
+        Vector3 RightAndABit = model.position + -model.right * 1.2f;
 
         if (Physics.Raycast(RightAndABit, Vector3.down, out hit, 2f))
         {

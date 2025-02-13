@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -7,10 +8,10 @@ public class MovementState : MonoBehaviour
     public PlayerInput playerInput;
 
     private Vector2 movInput;
+
     private Rigidbody rb;
 
     [SerializeField] private Animator anims;
-
 
     public float rvb;
 
@@ -47,13 +48,20 @@ public class MovementState : MonoBehaviour
 
     void Jump()
     {
-        if (PlayerManager.Instance.isGrounded)
+        if (PlayerManager.Instance.isGrounded && playerInput.Player.Move.ReadValue<Vector2>().y >= 0)
         {
-            rb.linearVelocity = Vector3.up * PlayerManager.Instance.jumpForce;
+            rb.AddForce(Vector3.up * PlayerManager.Instance.jumpForce);
+        }
+
+        if (PlayerManager.Instance.wallJump)
+        {
+            rb.AddForce(PlayerManager.Instance.dir * -600);
+            rb.AddForce(Vector3.up * 800);
         }
     }
 
 
+    
 
 
 
@@ -79,11 +87,17 @@ public class MovementState : MonoBehaviour
         {
             if(rvb < 0.1f)
             {
-                rb.linearVelocity = new Vector3(movInput.x, rb.linearVelocity.y, movInput.y);
+                if(rb.linearVelocity.magnitude < 10)
+                {
+                    rb.AddForce(new Vector3(movInput.x, rb.linearVelocity.y, movInput.y));
+                }
             }
             else
             {
-                rb.linearVelocity = new Vector3(movInput.x, rvb, movInput.y);
+                if (rb.linearVelocity.magnitude < 10)
+                {
+                    rb.AddForce(new Vector3(movInput.x, rb.linearVelocity.y, movInput.y));
+                }
             }
         }
 

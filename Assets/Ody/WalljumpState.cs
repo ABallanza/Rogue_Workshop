@@ -35,8 +35,8 @@ public class WalljumpState : MonoBehaviour
         PlayerManager.Instance.canRotate = true;
         PlayerManager.Instance.GetComponent<Collider>().enabled = false;
         PlayerManager.Instance.rb.isKinematic = false;
-        PlayerManager.Instance.rb.linearVelocity = PlayerManager.Instance.model.right * -15f;
-        PlayerManager.Instance.rb.linearVelocity = new Vector3(PlayerManager.Instance.rb.linearVelocity.x, 8f ,PlayerManager.Instance.rb.linearVelocity.z);
+        PlayerManager.Instance.rb.linearVelocity = PlayerManager.Instance.model.right * -5f;
+        PlayerManager.Instance.rb.linearVelocity = new Vector3(PlayerManager.Instance.rb.linearVelocity.x, 15f ,PlayerManager.Instance.rb.linearVelocity.z);
         StartCoroutine(EndJump());
     }
 
@@ -44,7 +44,7 @@ public class WalljumpState : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         PlayerManager.Instance.GetComponent<Collider>().enabled = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         Automata.Instance.ChangeState("MovementState");
         
     }

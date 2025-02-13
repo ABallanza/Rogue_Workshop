@@ -23,6 +23,11 @@ public class EnemyFightingState : MonoBehaviour
         player = GameObject.Find("Player").transform;
     }
 
+    private void FixedUpdate()
+    {
+        rb.AddForce(model.right * 5);
+    }
+
     void Update()
     {
         if (player == null) return;

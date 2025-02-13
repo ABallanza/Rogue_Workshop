@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
-using static UnityEngine.Android.AndroidGame;
-using Unity.Collections.LowLevel.Unsafe;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -49,6 +49,42 @@ public class PlayerManager : MonoBehaviour
     }
 
 
+    public bool wallJump = false;
+
+    [HideInInspector] public Vector3 dir;
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Walljump_Basic")
+        {
+            dir = model.transform.right;
+            rb.linearDamping = 12;
+            wallJump = true;
+        }
+
+
+        if (collision.transform.CompareTag("Walljump"))
+        {
+            Automata.Instance.ChangeState("WalljumpState");
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag == "Walljump_Basic")
+        {
+            StartCoroutine(StopWalljump());
+            rb.linearDamping = 3;
+        }
+    }
+
+    IEnumerator StopWalljump()
+    {
+        yield return new WaitForSeconds(0.1f);
+        wallJump = false;
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Hitbox_Enemy")
@@ -83,6 +119,9 @@ public class PlayerManager : MonoBehaviour
     {
         playerInput = new PlayerInput();
         playerInput.Enable();
+
+        playerInput.Player.Jump.performed += ctx => goDown = true;
+        playerInput.Player.Jump.canceled += ctx => goDown = false;
     }
 
     private void OnDisable()
@@ -101,11 +140,13 @@ public class PlayerManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private bool goDown = false;
+
     private void Update()
     {
         groundCol.enabled = isGrounded;
 
-        if (isGrounded && canMove)
+        if (isGrounded && canMove && goDown)
         {
             groundCol.enabled = !(playerInput.Player.Move.ReadValue<Vector2>().y < 0);
         }
@@ -153,14 +194,6 @@ public class PlayerManager : MonoBehaviour
             {
                 model.rotation = Quaternion.Euler(0, movementDirection > 0 ? 0 : 180, 0);
             }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag("Walljump"))
-        {
-            Automata.Instance.ChangeState("WalljumpState");
         }
     }
 }
