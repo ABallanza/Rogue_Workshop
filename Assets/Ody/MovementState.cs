@@ -99,7 +99,7 @@ public class MovementState : MonoBehaviour
     private void Update()
     {
 
-        anims.SetBool("isWalking", rb.linearVelocity.magnitude > 0);
+        anims.SetBool("isWalking", rb.linearVelocity.magnitude > 0.7f);
 
         movInput = playerInput.Player.Move.ReadValue<Vector2>() * PlayerManager.Instance.speed;
     }
