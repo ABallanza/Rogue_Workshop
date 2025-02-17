@@ -11,6 +11,6 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        Application.LoadLevel("Game");
+        Application.LoadLevel("NarraTest");
     }
 }

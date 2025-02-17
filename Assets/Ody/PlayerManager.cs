@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -129,6 +130,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+
+    public Animator openclose;
+
+    public void OpenClose()
+    {
+        openclose.Play("Close");
+    }
 
     public void TakeDamage(int damage)
     {

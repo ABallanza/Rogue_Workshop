@@ -426,7 +426,14 @@ MonoBehaviour:
   totalRoomsIndex: 0
   outline: {fileID: 6471845152830019238, guid: 07a919f051162974881ccd13aa9b6963, type: 3}
   shop: {fileID: 3713256103388643368, guid: 85c5f4c2256d6c847aa8eeb88383068c, type: 3}
-  startGenDirectly: 0
+  roomsBeforeBoss: 4
+  bossRoom: {fileID: 5187556859036751483, guid: 8982eb921219d8e4ea4a174e476ae9e4, type: 3}
+  startGenDirectly: 1
+  groundMelee: {fileID: 2777215575032147226, guid: 985f1461670211343ab7f97336685b5b, type: 3}
+  groundDistance: {fileID: 4914913269566351983, guid: 217964d3aa4a5c34a805528781ec4f95, type: 3}
+  Aerial: {fileID: 1686147761793746856, guid: 0102337a24860e24f8c5fd46ac94d48f, type: 3}
+  enemiesNumber: 30
+  actualEnemiesNumber: 0
   doors: []
   doorLeft: {fileID: 0}
   doorRight: {fileID: 0}

@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Door : MonoBehaviour
 {
+    public Text doorText;
 
     public bool chunks;
     public bool shop;
+    public bool life;
 
 
     public PlayerInput playerInput;
@@ -37,25 +40,49 @@ public class Door : MonoBehaviour
         print("door" + doorDict["Left"]);
         if(Generator.Instance.z == 0)
         {
+            doorText.text = "Combat Room";
+            if(Generator.Instance.roomsBeforeBoss <= 1)
+            {
+                doorText.text = "Boss Room";
+                doorText.color = Color.red;
+            }
             chunks = true;
             Generator.Instance.z++;
             return;
         }
         if(Generator.Instance.z == 1)
         {
-            shop = true;
+            doorText.text = "Combat Room";
+            if (Generator.Instance.roomsBeforeBoss <= 1)
+            {
+                doorText.text = "Boss Room";
+                doorText.color = Color.red;
+            }
+            chunks = true;
             Generator.Instance.z++;
             return;
         }
         if(Generator.Instance.z == 2)
         {
-            chunks = true;
+            doorText.text = "Shop Room";
+            if (Generator.Instance.roomsBeforeBoss <= 1)
+            {
+                doorText.text = "Boss Room";
+                doorText.color = Color.red;
+            }
+            shop = true;
             Generator.Instance.z++;
             return;
         }
         if (Generator.Instance.z == 3)
         {
-            shop = true;
+            doorText.text = "Life Room";
+            if (Generator.Instance.roomsBeforeBoss <= 1)
+            {
+                doorText.text = "Boss Room";
+                doorText.color = Color.red;
+            }
+            life = true;
             Generator.Instance.z++;
             return;
         }

@@ -55,9 +55,19 @@ public class Generator : MonoBehaviour
     [Header("Shop")]
     public GameObject shop;
 
+    [Header("End Game")]
+    public int roomsBeforeBoss = 5;
+    public GameObject bossRoom;
+
 
     public bool startGenDirectly = true;
 
+    [Header("Enemies")]
+    public GameObject groundMelee;
+    public GameObject groundDistance;
+    public GameObject Aerial;
+    public int enemiesNumber = 30;
+    public int actualEnemiesNumber;
 
     private void Awake()
     {
@@ -73,22 +83,16 @@ public class Generator : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            StartCoroutine(PlaceChunks(1));
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            StartCoroutine(PlaceShop());
-        }
-    }
 
     public Door[] doors;
 
     void Reset()
     {
+        actualEnemiesNumber = 30;
+        if (GameObject.Find("Player"))
+        {
+            PlayerManager.Instance.OpenClose();
+        }
         z = 0;
         lastColumnOffset = 0;
         pos = Vector3.zero;
@@ -112,17 +116,36 @@ public class Generator : MonoBehaviour
     {
         if (startGenDirectly)
         {
-            PlaceChunks(0);
+            StartCoroutine(PlaceChunks(1));
         }
     }
 
     public IEnumerator PlaceChunks(int door)
     {
-        Reset();
-        yield return new WaitForSeconds(1f);
-        GenerateChunks();
-        SetDoors(door);
+        roomsBeforeBoss--;
+
+        if(roomsBeforeBoss > 0)
+        {
+            Reset();
+            yield return new WaitForSeconds(1f);
+            GenerateChunks();
+            SetDoors(door);
+        }
+        else
+        {
+            Reset();
+            yield return new WaitForSeconds(1f);
+            CreateBoss();
+        }
     }
+
+
+    void CreateBoss()
+    {
+        GameObject g = Instantiate(bossRoom);
+        g.transform.SetParent(transform);
+    }
+
 
     public Transform doorLeft;
     public Transform doorRight;
@@ -161,22 +184,26 @@ public class Generator : MonoBehaviour
         {
             tpPos = doorRight.position;
             doorRight.GetComponent<Door>().enabled = false;
+            doorRight.GetComponent<Door>().doorText.text = "";
             
         }
         if(i == 1)
         {
             tpPos = doorLeft.position;
             doorLeft.GetComponent<Door>().enabled = false;
+            doorLeft.GetComponent<Door>().doorText.text = "";
         }
         if(i == 2)
         {
             tpPos = doorDown.position;
             doorDown.GetComponent<Door>().enabled = false;
+            doorDown.GetComponent<Door>().doorText.text = "";
         }
         if(i == 3)
         {
             tpPos = doorUp.position;
             doorUp.GetComponent<Door>().enabled = false;
+            doorUp.GetComponent<Door>().doorText.text = "";
         }
 
         if (!spawnedPlayer)
