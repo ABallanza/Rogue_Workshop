@@ -180,6 +180,8 @@ public class PlayerManager : MonoBehaviour
     {
         groundCol.enabled = isGrounded;
 
+        GetComponentInChildren<Animator>().SetBool("isGrounded", isGrounded);
+
         if (isGrounded && canMove && goDown)
         {
             groundCol.enabled = !(playerInput.Player.Move.ReadValue<Vector2>().y < 0);

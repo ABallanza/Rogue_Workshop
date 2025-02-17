@@ -18,6 +18,7 @@ public class DashState : MonoBehaviour
         PlayerManager.Instance.GetComponent<Collider>().excludeLayers = LayerMask.GetMask("Enemy");
         rb.linearVelocity = PlayerManager.Instance.model.right * PlayerManager.Instance.dashForce * 10;
         StartCoroutine("EndDash");
+        PlayerManager.Instance.transform.GetComponentInChildren<Animator>().Play("Dash");
     }
 
 

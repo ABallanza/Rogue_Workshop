@@ -61,6 +61,8 @@ public class MovementState : MonoBehaviour
     {
         rvb = 100;
 
+        anims.SetTrigger("Jump");
+
         if (PlayerManager.Instance.isGrounded && playerInput.Player.Move.ReadValue<Vector2>().y >= 0)
         {
             rb.AddForce(Vector3.up * PlayerManager.Instance.jumpForce);
@@ -98,7 +100,6 @@ public class MovementState : MonoBehaviour
 
     private void Update()
     {
-
         anims.SetBool("isWalking", rb.linearVelocity.magnitude > 0.7f);
 
         movInput = playerInput.Player.Move.ReadValue<Vector2>() * PlayerManager.Instance.speed;
