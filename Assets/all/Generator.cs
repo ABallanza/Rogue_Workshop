@@ -77,7 +77,7 @@ public class Generator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            StartCoroutine(PlaceChunks(0));
+            StartCoroutine(PlaceChunks(1));
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
