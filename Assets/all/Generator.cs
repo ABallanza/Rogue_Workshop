@@ -9,6 +9,7 @@ using System.Linq;
 
 public class Generator : MonoBehaviour
 {
+    [HideInInspector] public int z = 0;
 
     public static Generator Instance;
 
@@ -76,22 +77,28 @@ public class Generator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            PlaceChunks();
+            StartCoroutine(PlaceChunks(0));
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            PlaceShop();
+            StartCoroutine(PlaceShop());
         }
     }
 
-
+    public Door[] doors;
 
     void Reset()
     {
+        z = 0;
+        lastColumnOffset = 0;
+        pos = Vector3.zero;
+        randomSpacing = 0;
+        rdmSpacing = 0;
         CreateLists();
-        foreach(Transform T in transform)
+        Chunks.Clear();
+        foreach (Transform T in transform)
         {
-            if(T != this)
+            if (T != this)
             {
                 Destroy(T.gameObject);
             }
@@ -105,32 +112,104 @@ public class Generator : MonoBehaviour
     {
         if (startGenDirectly)
         {
-            PlaceChunks();
+            PlaceChunks(0);
         }
     }
 
-    public void PlaceChunks()
+    public IEnumerator PlaceChunks(int door)
     {
         Reset();
+        yield return new WaitForSeconds(1f);
         GenerateChunks();
+        SetDoors(door);
     }
 
-    public void PlaceShop()
+    public Transform doorLeft;
+    public Transform doorRight;
+    public Transform doorDown;
+    public Transform doorUp;
+
+    Vector3 tpPos;
+
+    void SetDoors(int i)
+    {
+        doors = GameObject.FindObjectsOfType<Door>();
+        foreach (Door d in doors)
+        {
+            if (d.doorDict["Left"])
+            {
+                doorLeft = d.gameObject.transform;
+            }
+
+            if (d.doorDict["Right"])
+            {
+                doorRight = d.gameObject.transform;
+            }
+
+            if (d.doorDict["Up"])
+            {
+                doorUp = d.gameObject.transform;
+            }
+
+            if (d.doorDict["Down"])
+            {
+                doorDown = d.gameObject.transform;
+            }
+        }
+
+        if(i == 0)
+        {
+            tpPos = doorRight.position;
+            doorRight.GetComponent<Door>().enabled = false;
+            
+        }
+        if(i == 1)
+        {
+            tpPos = doorLeft.position;
+            doorLeft.GetComponent<Door>().enabled = false;
+        }
+        if(i == 2)
+        {
+            tpPos = doorDown.position;
+            doorDown.GetComponent<Door>().enabled = false;
+        }
+        if(i == 3)
+        {
+            tpPos = doorUp.position;
+            doorUp.GetComponent<Door>().enabled = false;
+        }
+
+        if (!spawnedPlayer)
+        {
+            spawnedPlayer = true;
+            Instantiate(player, tpPos, Quaternion.identity);
+        }
+        else
+        {
+            GameObject.Find("Player").GetComponent<Rigidbody>().position = tpPos;
+        }
+    }
+
+
+    public IEnumerator PlaceShop()
     {
         Reset();
+        yield return new WaitForSeconds(1f);
         GenerateShop();
     }
 
     void GenerateShop()
     {
-        Instantiate(shop, Vector3.zero, Quaternion.identity);
+        GameObject s = Instantiate(shop, Vector3.zero, Quaternion.identity);
+        s.transform.SetParent(transform);
         if (!spawnedPlayer)
         {
+            spawnedPlayer = true;
             Instantiate(player, Vector3.zero, Quaternion.identity);
         }
         else
         {
-            GameObject.Find("Player").transform.position = Vector3.zero;
+            GameObject.Find("Player").transform.position = s.transform.localPosition;
         }
     }
 
@@ -144,11 +223,6 @@ public class Generator : MonoBehaviour
             for(int j = 0; j < chunksPerColumns; j++)
             {
                 GameObject bs = Instantiate(baseChunk, pos, Quaternion.identity);
-                if (!spawnedPlayer)
-                {
-                    spawnedPlayer = true;
-                    Instantiate(player, new Vector3(pos.x + 8, pos.y + 8, pos.z), Quaternion.identity);
-                }
 
                 bs.transform.SetParent(transform);
                 Chunks.Add(bs.GetComponent<ChunkManager>());

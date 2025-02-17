@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc805195c575564aa3e28747a5c09b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  z: 0
   baseChunk: {fileID: 6471845152830019238, guid: 50a51d48246b90548b267b7030842324, type: 3}
   Chunks: []
   walls: {fileID: 1790397781341764411, guid: e25964cdff25b4f44b1610767caae2e1, type: 3}
@@ -422,11 +423,15 @@ MonoBehaviour:
   - {fileID: 7915158134385224969, guid: 9691e6ad4c0e8264ead5dbe376379140, type: 3}
   doorRooms:
   - {fileID: 7915158134385224969, guid: c6fa51843d111f94cb5abdcdb4a4307d, type: 3}
-  doorIndexes: 
   totalRoomsIndex: 0
   outline: {fileID: 6471845152830019238, guid: 07a919f051162974881ccd13aa9b6963, type: 3}
   shop: {fileID: 3713256103388643368, guid: 85c5f4c2256d6c847aa8eeb88383068c, type: 3}
-  startGenDirectly: 1
+  startGenDirectly: 0
+  doors: []
+  doorLeft: {fileID: 0}
+  doorRight: {fileID: 0}
+  doorDown: {fileID: 0}
+  doorUp: {fileID: 0}
   graphCheck: []
 --- !u!4 &1712386339
 Transform:

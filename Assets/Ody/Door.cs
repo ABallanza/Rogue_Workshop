@@ -4,6 +4,9 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
 
+    public bool chunks;
+    public bool shop;
+
 
     public PlayerInput playerInput;
 
@@ -32,27 +35,73 @@ public class Door : MonoBehaviour
     private void Start()
     {
         print("door" + doorDict["Left"]);
+        if(Generator.Instance.z == 0)
+        {
+            chunks = true;
+            Generator.Instance.z++;
+            return;
+        }
+        if(Generator.Instance.z == 1)
+        {
+            shop = true;
+            Generator.Instance.z++;
+            return;
+        }
+        if(Generator.Instance.z == 2)
+        {
+            chunks = true;
+            Generator.Instance.z++;
+            return;
+        }
+        if (Generator.Instance.z == 3)
+        {
+            shop = true;
+            Generator.Instance.z++;
+            return;
+        }
     }
 
     void EnterDoor()
     {
         if (isIn)
         {
-            if (doorDict["Left"])
+            if (chunks)
             {
-                Application.LoadLevel("MainMenu");
+                if (doorDict["Left"])
+                {
+                    if (chunks)
+                    {
+                        Generator.Instance.StartCoroutine("PlaceChunks", 0);
+                    }
+                }
+
+                if (doorDict["Right"])
+                {
+                    if (chunks)
+                    {
+                        Generator.Instance.StartCoroutine("PlaceChunks", 1);
+                    }
+                }
+
+                if (doorDict["Up"])
+                {
+                    if (chunks)
+                    {
+                        Generator.Instance.StartCoroutine("PlaceChunks", 2);
+                    }
+                }
+
+                if (doorDict["Down"])
+                {
+                    if (chunks)
+                    {
+                        Generator.Instance.StartCoroutine("PlaceChunks", 3);
+                    }
+                }
             }
-            if (doorDict["Right"])
+            if (shop)
             {
-                Application.LoadLevel("MainMenu");
-            }
-            if (doorDict["Up"])
-            {
-                Application.LoadLevel("MainMenu");
-            }
-            if (doorDict["Down"])
-            {
-                Application.LoadLevel("MainMenu");
+                Generator.Instance.StartCoroutine("PlaceShop");
             }
         }
     }
