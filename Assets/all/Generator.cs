@@ -88,6 +88,7 @@ public class Generator : MonoBehaviour
 
     void Reset()
     {
+        CreateLists();
         foreach(Transform T in transform)
         {
             if(T != this)
@@ -306,6 +307,8 @@ public class Generator : MonoBehaviour
 
     void CreateLists()
     {
+        roomsDictionary.Clear();
+
         foreach (string key in new List<string>() { "Up", "Down", "LeftUp", "LeftDown", "RightUp", "RightDown" })
         {
             roomsDictionary.Add(key, new List<GameObject>());
