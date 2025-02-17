@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour
     public GameObject shootRot;
     public PlayerInput playerInput;
 
+    bool isShooting = false;
+
     Vector2 keyInput;
 
     private void OnEnable()
@@ -18,7 +20,8 @@ public class Gun : MonoBehaviour
         playerInput.Player.LockMovement.performed += ctx => LockMove(1);
         playerInput.Player.LockMovement.canceled += ctx => LockMove(2);
 
-        playerInput.Player.Shoot.performed += ctx => Shoot();
+        playerInput.Player.Shoot.performed += ctx => isShooting = true;
+        playerInput.Player.Shoot.canceled += ctx => isShooting = false;
     }
 
     private void OnDisable()
@@ -28,7 +31,8 @@ public class Gun : MonoBehaviour
         playerInput.Player.LockMovement.performed -= ctx => LockMove(1);
         playerInput.Player.LockMovement.canceled -= ctx => LockMove(2);
 
-        playerInput.Player.Shoot.performed -= ctx => Shoot();
+        playerInput.Player.Shoot.performed -= ctx => isShooting = true;
+        playerInput.Player.Shoot.canceled -= ctx => isShooting = false;
     }
 
     void LockMove(int i)
@@ -52,6 +56,11 @@ public class Gun : MonoBehaviour
             float angle = Mathf.Atan2(keyInput.y, keyInput.x) * Mathf.Rad2Deg; // Convert input to an angle
             float snappedAngle = Mathf.Round(angle / 45) * 45; // Snap to nearest 45 degrees
             shootRot.transform.rotation = Quaternion.Euler(0, 0, snappedAngle);
+        }
+
+        if (isShooting)
+        {
+            Shoot();
         }
     }
 
