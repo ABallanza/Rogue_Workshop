@@ -38,8 +38,22 @@ public class Door : MonoBehaviour
     {
         if (isIn)
         {
-            print("RENTRER");
-            
+            if (doorDict["Left"])
+            {
+                Application.LoadLevel("MainMenu");
+            }
+            if (doorDict["Right"])
+            {
+                Application.LoadLevel("MainMenu");
+            }
+            if (doorDict["Up"])
+            {
+                Application.LoadLevel("MainMenu");
+            }
+            if (doorDict["Down"])
+            {
+                Application.LoadLevel("MainMenu");
+            }
         }
     }
 

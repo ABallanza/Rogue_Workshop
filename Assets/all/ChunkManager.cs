@@ -75,15 +75,16 @@ public class ChunkManager : MonoBehaviour
             }
             else
             {
-                Instantiate(newRoom, transform.position, Quaternion.identity);
+                GameObject r = Instantiate(newRoom, transform.position, Quaternion.identity);
+                r.transform.SetParent(transform);
             }
         }
         else
         {
             GameObject newRoom = gen.doorRooms[Random.Range(0, gen.doorRooms.Length)];
             GameObject door = Instantiate(newRoom, transform.position, Quaternion.identity);
-            print(door.GetComponent<Door>().doorDict.Keys.Count);
-            door.GetComponent<Door>().doorDict[doorKey] = true;
+            door.GetComponentInChildren<Door>().doorDict[doorKey] = true;
+            door.transform.SetParent(transform);
         }
         
 

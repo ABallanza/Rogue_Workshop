@@ -72,6 +72,31 @@ public class Generator : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlaceChunks();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            PlaceShop();
+        }
+    }
+
+
+
+    void Reset()
+    {
+        foreach(Transform T in transform)
+        {
+            if(T != this)
+            {
+                Destroy(T.gameObject);
+            }
+        }
+    }
+
 
 
 
@@ -79,17 +104,19 @@ public class Generator : MonoBehaviour
     {
         if (startGenDirectly)
         {
-            GenerateChunks();
+            PlaceChunks();
         }
     }
 
-    public void TestChunks()
+    public void PlaceChunks()
     {
+        Reset();
         GenerateChunks();
     }
 
-    public void TestShop()
+    public void PlaceShop()
     {
+        Reset();
         GenerateShop();
     }
 
@@ -108,7 +135,8 @@ public class Generator : MonoBehaviour
 
     void GenerateChunks()
     {
-        Instantiate(walls, Vector3.zero, Quaternion.identity);
+        GameObject t = Instantiate(walls, Vector3.zero, Quaternion.identity);
+        t.transform.SetParent(transform);
 
         for(int i = 0; i < columns; i++)
         {
@@ -231,7 +259,6 @@ public class Generator : MonoBehaviour
 
         foreach (string key in new List<string>() { "Up", "Down", "LeftUp", "LeftDown", "RightUp", "RightDown" })
         {
-            print(Chunks[chunkID].openSides[key] + " " + key + " to " + roomToAdd.openSides[key]);
 
             if (!roomToAdd.openSides[key] && Chunks[chunkID].openSides[key])
             {
