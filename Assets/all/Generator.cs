@@ -5,6 +5,7 @@ using UnityEngine;
 using Unity.Properties;
 using UnityEditor;
 using UnityEngine.Rendering;
+using System.Linq;
 
 public class Generator : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class Generator : MonoBehaviour
     private int randomSpacing;
     public bool isOn = true;
     private int rdmSpacing;
-    private int lastColumnOffset;
+    private int lastColumnOffset = 0;
 
     private Vector3 pos;
 
@@ -45,7 +46,7 @@ public class Generator : MonoBehaviour
     public Dictionary<string, List<GameObject>> roomsDictionary = new Dictionary<string, List<GameObject>>();
 
     [Header("Door Settings")]
-    public List<int> doorIndexes = new List<int>();
+    public Dictionary<string, int> doorIndexes = new Dictionary<string, int>();
     public int totalRoomsIndex;
 
     public GameObject outline;
@@ -62,10 +63,11 @@ public class Generator : MonoBehaviour
         Instance = this;
         CreateLists();
         totalRoomsIndex = columns * chunksPerColumns;
-        doorIndexes.Add(Random.Range(0, chunksPerColumns));
-        doorIndexes.Add(Random.Range((totalRoomsIndex-chunksPerColumns), totalRoomsIndex));
-        doorIndexes.Add(chunksPerColumns * (Random.Range(1, columns-1)));
-        doorIndexes.Add(chunksPerColumns * (Random.Range(2, columns)) - 1);
+
+        doorIndexes.Add("Left", Random.Range(0, chunksPerColumns));
+        doorIndexes.Add("Right", Random.Range((totalRoomsIndex-chunksPerColumns), totalRoomsIndex));
+        doorIndexes.Add("Down", chunksPerColumns * (Random.Range(1, columns-1)));
+        doorIndexes.Add("Up", chunksPerColumns * (Random.Range(2, columns)) - 1); 
 
     }
 
@@ -127,7 +129,7 @@ public class Generator : MonoBehaviour
 
             if (isOn)
             {
-                lastColumnOffset = Random.Range(-3, 4);
+                lastColumnOffset += Random.Range(-1, 2);
                 rdmSpacing += lastColumnOffset;
                 pos.y = (spacing / 2) * rdmSpacing;
             }
@@ -142,13 +144,19 @@ public class Generator : MonoBehaviour
         int v = 0;
         foreach (ChunkManager chunk in Chunks)
         {
-            if (doorIndexes.Contains(v))
+            bool spawned = false;
+            foreach (string key in doorIndexes.Keys)
             {
-                chunk.SpawnChunk(null, true);
+                if (doorIndexes[key] == v)
+                {
+                    chunk.SpawnChunk(null, true, key);
+                    spawned = true;
+                    break;
+                }
             }
-            else
+            
+            if (!spawned)
             {
-
                 chunk.SpawnChunk();
             }
             v++;

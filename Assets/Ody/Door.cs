@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -22,19 +23,23 @@ public class Door : MonoBehaviour
     }
 
 
-    public bool upDoor = false;
-    public bool downDoor = false;
-    public bool leftDoor = false;
-    public bool rightDoor = false;
+
 
     private bool isIn = false;
 
+    public Dictionary<string, bool> doorDict = new Dictionary<string, bool>() { ["Up"] = false, ["Down"] = false, ["Left"] = false, ["Right"] = false };
+
+    private void Start()
+    {
+        print("door" + doorDict["Left"]);
+    }
 
     void EnterDoor()
     {
         if (isIn)
         {
             print("RENTRER");
+            
         }
     }
 

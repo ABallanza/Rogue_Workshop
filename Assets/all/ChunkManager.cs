@@ -33,24 +33,20 @@ public class ChunkManager : MonoBehaviour
 
     public List<GameObject> roomsAvailable = new List<GameObject>();
 
-    public void SpawnChunk(List<GameObject> blacklist = null, bool isDoor = false)
+    public void SpawnChunk(List<GameObject> blacklist = null, bool isDoor = false, string doorKey = "")
     {
         Generator gen = Generator.Instance;
+        roomsAvailable.Clear();
 
-        if (isDoor)
+        if (!isDoor)
         {
-
-        }
-        else
-        {
-            roomsAvailable.Clear();
-
             foreach (string key in gen.roomsDictionary.Keys)
             {
                 if (openSides[key])
                 {
                     roomsAvailable = roomsAvailable.Union(gen.roomsDictionary[key]).ToList();
                 }
+            
             }
 
             if (blacklist != null)
@@ -82,6 +78,14 @@ public class ChunkManager : MonoBehaviour
                 Instantiate(newRoom, transform.position, Quaternion.identity);
             }
         }
+        else
+        {
+            GameObject newRoom = gen.doorRooms[Random.Range(0, gen.doorRooms.Length)];
+            GameObject door = Instantiate(newRoom, transform.position, Quaternion.identity);
+            print(door.GetComponent<Door>().doorDict.Keys.Count);
+            door.GetComponent<Door>().doorDict[doorKey] = true;
+        }
+        
 
     }
 
