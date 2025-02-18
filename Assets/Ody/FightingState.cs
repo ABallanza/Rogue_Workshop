@@ -21,6 +21,9 @@ public class FightingState : MonoBehaviour
 
         anims.SetBool("isFighting", true);
         anims.SetTrigger("Fight");
+
+        StopCoroutine("Fight");
+        StartCoroutine("Fight");
     }
 
     private void OnDisable()

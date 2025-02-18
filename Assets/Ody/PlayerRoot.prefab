@@ -1880,7 +1880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 834, y: 285.5}
+  m_AnchoredPosition: {x: 834, y: 274}
   m_SizeDelta: {x: 176.31891, y: 65.19238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2875076887062986967
@@ -2616,7 +2616,7 @@ RectTransform:
   m_GameObject: {fileID: 4126458395527186546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9788394, y: 1.9788394, z: 1.9788394}
+  m_LocalScale: {x: 2.0837178, y: 2.0837178, z: 2.0837178}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2269422874678519759}
@@ -2647,7 +2647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6745098}
+  m_Color: {r: 0.1137255, g: 0.3019608, b: 0.42352945, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2806,14 +2806,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4279448492514250387}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0101059, y: -0, z: -0, w: 0.999949}
-  m_LocalPosition: {x: 0, y: 1.13, z: -16.1}
+  m_LocalRotation: {x: 0.031622596, y: -0, z: -0, w: 0.9994999}
+  m_LocalPosition: {x: 0, y: 1.562, z: -16.104}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1369389009296079501}
   m_Father: {fileID: 5246534037189121362}
-  m_LocalEulerAnglesHint: {x: 1.158, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.624, y: 0, z: 0}
 --- !u!20 &429243910103924020
 Camera:
   m_ObjectHideFlags: 0
@@ -5183,7 +5183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anims: {fileID: 6575375243309160574}
-  rvb: 0
+  moveSpeed: 5
+  jumpForce: 10
+  maxSpeed: 10
 --- !u!1 &8439977931732053201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5738,8 +5740,8 @@ MonoBehaviour:
   rb: {fileID: 3163815583406780088}
   model: {fileID: 4637031270880420752}
   canRotate: 1
-  speed: 35
-  jumpForce: 1200
+  speed: 8
+  jumpForce: 25
   canMove: 1
   isGrounded: 0
   groundCheck: {fileID: 8354291623346720836}

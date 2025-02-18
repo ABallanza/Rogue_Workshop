@@ -1,27 +1,22 @@
-using System.Security.Cryptography;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using System.Collections;
-using System.Collections.Generic;
 
 public class MovementState : MonoBehaviour
 {
     public PlayerInput playerInput;
-
     private Vector2 movInput;
-
     private Rigidbody rb;
-
     [SerializeField] private Animator anims;
 
-    public float rvb;
+    public float moveSpeed = 5f;
+    public float jumpForce = 10f;
+    public float maxSpeed = 10f;
+    private bool canMoveTowardsWall = true;
+    private Vector3 lastWallJumpDir;
+    private float wallJumpCooldown = 0.5f;
 
     private void OnEnable()
     {
-        canMoveTowardsWall = true;
-
         playerInput = new PlayerInput();
         playerInput.Enable();
 
@@ -35,7 +30,6 @@ public class MovementState : MonoBehaviour
     private void OnDisable()
     {
         playerInput.Disable();
-
         playerInput.Player.Jump.performed -= ctx => Jump();
         playerInput.Player.Jump.canceled -= ctx => EndJump();
 
@@ -43,39 +37,32 @@ public class MovementState : MonoBehaviour
         playerInput.Player.Dash.performed -= ctx => PlayerManager.Instance.Dash();
     }
 
-    private void Start()
-    {
-        rb = PlayerManager.Instance.rb;
-    }
-
     void StartFight()
     {
         Automata.Instance.ChangeState("FightingState");
     }
 
-    private bool canMoveTowardsWall = false;
-    private Vector3 lastWallJumpDir;
-    private float wallJumpCooldown = 0.5f; // Cooldown time
+    private void Start()
+    {
+        rb = PlayerManager.Instance.rb;
+    }
 
     void Jump()
     {
-        rvb = 100;
+        if (!PlayerManager.Instance.canMove) return;
 
-        anims.SetTrigger("Jump");
-
-        if (PlayerManager.Instance.isGrounded && playerInput.Player.Move.ReadValue<Vector2>().y >= 0)
+        if (PlayerManager.Instance.isGrounded && movInput.y >= 0)
         {
-            rb.AddForce(Vector3.up * PlayerManager.Instance.jumpForce);
+            anims.SetTrigger("Jump");
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z); // Set Y velocity directly
         }
-
-        if (PlayerManager.Instance.wallJump && !PlayerManager.Instance.isGrounded)
+        else if (PlayerManager.Instance.wallJump && !PlayerManager.Instance.isGrounded)
         {
-            rb.linearVelocity = Vector3.zero; // Reset all movement before applying wall jump forces
-            lastWallJumpDir = PlayerManager.Instance.dir.normalized; // Store last wall jump direction
-            rb.AddForce(lastWallJumpDir * -600);
-            rb.AddForce(Vector3.up * 1400);
+            // Wall Jump
+            lastWallJumpDir = PlayerManager.Instance.dir.normalized;
+            rb.linearVelocity = new Vector3(-lastWallJumpDir.x * 6f, jumpForce + 5, rb.linearVelocity.z); // Apply controlled wall jump force
 
-            StartCoroutine(WallJumpCooldown()); // Start cooldown
+            StartCoroutine(WallJumpCooldown());
         }
     }
 
@@ -86,39 +73,33 @@ public class MovementState : MonoBehaviour
         canMoveTowardsWall = true;
     }
 
-
-
-
     void EndJump()
     {
         if (rb.linearVelocity.y > 0)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f, rb.linearVelocity.z); // Reduce upward velocity
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f, rb.linearVelocity.z); // Reduce jump height slightly
         }
     }
 
-
     private void Update()
     {
+        movInput = playerInput.Player.Move.ReadValue<Vector2>();
         anims.SetBool("isWalking", rb.linearVelocity.magnitude > 0.7f);
 
-        movInput = playerInput.Player.Move.ReadValue<Vector2>() * PlayerManager.Instance.speed;
+        moveSpeed = PlayerManager.Instance.speed;
+        jumpForce = PlayerManager.Instance.jumpForce;
     }
 
     private void FixedUpdate()
     {
-        if (rb && PlayerManager.Instance.canMove)
-        {
-            Vector2 moveDir = movInput.normalized; // Get normalized movement direction
-            bool movingTowardsWall = Vector3.Dot(new Vector3(moveDir.x, 0, moveDir.y), lastWallJumpDir) > 0.1f;
+        if (!PlayerManager.Instance.canMove) return;
 
-            if (!movingTowardsWall || canMoveTowardsWall) // Block movement towards the wall
-            {
-                if (rb.linearVelocity.magnitude < 10)
-                {
-                    rb.AddForce(new Vector3(movInput.x, rb.linearVelocity.y, movInput.y));
-                }
-            }
+        Vector2 moveDir = movInput.normalized;
+        bool movingTowardsWall = Vector3.Dot(new Vector3(moveDir.x, 0, moveDir.y), lastWallJumpDir) > 0.1f;
+
+        if (!movingTowardsWall || canMoveTowardsWall)
+        {
+            rb.linearVelocity = new Vector3(movInput.x * moveSpeed, rb.linearVelocity.y, rb.linearVelocity.z); // Use velocity directly
         }
     }
 }
