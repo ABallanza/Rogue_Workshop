@@ -38,8 +38,13 @@ public class Generator : MonoBehaviour
     private Vector3 pos;
 
     [Header("Chunks")]
-    public GameObject[] rooms;
-    public GameObject[] doorRooms;
+    public GameObject[] roomsBunker;
+    public GameObject[] doorRoomsBunker;
+
+    public GameObject[] roomsJungle;
+    public GameObject[] doorRoomsJungle;
+
+    public bool isBunker = true;
 
 
 
@@ -415,12 +420,27 @@ public class Generator : MonoBehaviour
             roomsDictionary.Add(key, new List<GameObject>());
         }
 
-        foreach (GameObject r in rooms)
+        if (isBunker)
         {
-            foreach (string key in roomsDictionary.Keys)
+            foreach (GameObject r in roomsBunker)
             {
-                roomsDictionary[key].Add(r);
+                foreach (string key in roomsDictionary.Keys)
+                {
+                    roomsDictionary[key].Add(r);
+                }
             }
         }
+        else
+        {
+            foreach (GameObject r in roomsJungle)
+            {
+                foreach (string key in roomsDictionary.Keys)
+                {
+                    roomsDictionary[key].Add(r);
+                }
+            }
+        }
+
+        
     }
 }
