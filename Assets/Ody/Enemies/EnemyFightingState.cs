@@ -1,31 +1,29 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEngine.Android.AndroidGame;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class EnemyFightingState : MonoBehaviour
 {
     [SerializeField] private Transform model;
     [SerializeField] private Transform player;
     [SerializeField] private Rigidbody rb;
-
     [SerializeField] private EnemyAutomata automata;
 
     [Header("Fight Settings")]
-    [SerializeField] private float distanceToHit = 2f;
-    private bool hasHit = false;
+    [SerializeField] private float attackDistance = 2f;
     [SerializeField] private float timeBetweenHits = 1f;
     [SerializeField] private Animator anims;
+    [SerializeField] private float moveSpeed = 5f;
+
+    private bool hasHit = false;
 
     private void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("Player")?.transform;
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        rb.AddForce(model.right * 5);
+        hasHit = false;
     }
 
     void Update()
@@ -34,32 +32,23 @@ public class EnemyFightingState : MonoBehaviour
 
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
 
-        if(directionToPlayer.x > 0)
-        {
-            model.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            model.rotation = Quaternion.Euler(0, 0, 0);
-        }
+        // Flip enemy to face player
+        model.rotation = directionToPlayer.x > 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
 
-        if (CanGoForward())
+        // Move towards the player continuously
+        rb.linearVelocity = new Vector3(directionToPlayer.x * moveSpeed, rb.linearVelocity.y, 0);
+
+        // Attack when within attack distance
+        if (Vector3.Distance(transform.position, player.position) <= attackDistance)
         {
-            if(Vector3.Distance(transform.position, player.position) > distanceToHit)
+            if (!hasHit)
             {
-                rb.linearVelocity = model.right * -5;
-            }
-            else
-            {
-                if (!hasHit)
-                {
-                    StartCoroutine(Fight());
-                }
+                StartCoroutine(Fight());
             }
         }
 
-
-        if (Mathf.Abs(transform.position.y - GameObject.Find("Player").transform.position.y) > 1)
+        // If enemy is too far from the player vertically, switch states
+        if (Mathf.Abs(transform.position.y - player.position.y) > 1)
         {
             automata.ChangeState("MovementState");
         }
@@ -71,17 +60,5 @@ public class EnemyFightingState : MonoBehaviour
         anims.Play("Hit");
         yield return new WaitForSeconds(timeBetweenHits);
         hasHit = false;
-    }
-
-    bool CanGoForward()
-    {
-        RaycastHit hit;
-        Vector3 RightAndABit = model.position + -model.right * 2f;
-
-        if (Physics.Raycast(RightAndABit, Vector3.down, out hit, 2f))
-        {
-            return hit.transform != null;
-        }
-        return false;
     }
 }

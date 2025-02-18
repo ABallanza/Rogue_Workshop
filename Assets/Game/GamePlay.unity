@@ -414,12 +414,13 @@ MonoBehaviour:
   chunksPerColumns: 4
   spacing: 16
   isOn: 1
-  rooms:
+  roomsBunker:
   - {fileID: 7915158134385224969, guid: 92d61680e5ad66f4a989df5036658c97, type: 3}
   - {fileID: 7915158134385224969, guid: e289ac81ae8393e469012f126defa933, type: 3}
   - {fileID: 7915158134385224969, guid: eb858cb92973c32469fb9052a5751d9a, type: 3}
   - {fileID: 7915158134385224969, guid: b3cc32e4360d565409349d9d8fdc3728, type: 3}
   - {fileID: 7915158134385224969, guid: 3c1d31b1ad843344fbfd256e861647de, type: 3}
+  - {fileID: 7915158134385224969, guid: d3efeeb3b9a95d747ad612abf50b1019, type: 3}
   - {fileID: 7915158134385224969, guid: 9691e6ad4c0e8264ead5dbe376379140, type: 3}
   - {fileID: 7915158134385224969, guid: b34e65116d08b3b4ea6c9206ef5411e6, type: 3}
   - {fileID: 7915158134385224969, guid: b8fe654173a2d8e41b56802f8aedb571, type: 3}
@@ -434,11 +435,16 @@ MonoBehaviour:
   - {fileID: 7915158134385224969, guid: 7e250938ad644a841973bd291142426f, type: 3}
   - {fileID: 7915158134385224969, guid: 1f5b4a2c29e20ad4d88e7cc5d48ef554, type: 3}
   - {fileID: 7915158134385224969, guid: fdf78cb84232b5e4d8eddb89a41f04b7, type: 3}
-  doorRooms:
+  - {fileID: 7915158134385224969, guid: db7009d4df8b13349b647d7bb7f6f88f, type: 3}
+  doorRoomsBunker:
   - {fileID: 7915158134385224969, guid: c6fa51843d111f94cb5abdcdb4a4307d, type: 3}
+  roomsJungle: []
+  doorRoomsJungle: []
+  isBunker: 1
   totalRoomsIndex: 0
   outline: {fileID: 6471845152830019238, guid: 07a919f051162974881ccd13aa9b6963, type: 3}
   shop: {fileID: 3713256103388643368, guid: 85c5f4c2256d6c847aa8eeb88383068c, type: 3}
+  challengeRoom: {fileID: 3713256103388643368, guid: 1df08951fcc0695439a042798dbcbbb4, type: 3}
   roomsBeforeBoss: 4
   bossRoom: {fileID: 5187556859036751483, guid: 8982eb921219d8e4ea4a174e476ae9e4, type: 3}
   startGenDirectly: 1

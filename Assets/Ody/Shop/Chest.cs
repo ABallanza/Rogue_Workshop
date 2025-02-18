@@ -24,6 +24,8 @@ public class Chest : MonoBehaviour
 
     public Ability[] abilities;
 
+    bool used = false;
+
 
     private void OnEnable()
     {
@@ -60,13 +62,17 @@ public class Chest : MonoBehaviour
     public void OpenChest()
     {
 
-        GetUpgrades();
-
-        if(!openned && canOpen)
+        if (!used)
         {
-            openned = true;
-            text.SetActive(false);
-            shopCanvas.SetActive(true);
+            used = true;
+            GetUpgrades();
+
+            if (!openned && canOpen)
+            {
+                openned = true;
+                text.SetActive(false);
+                shopCanvas.SetActive(true);
+            }
         }
     }
 
@@ -122,6 +128,7 @@ public class Chest : MonoBehaviour
     {
         ability._name.text = upgrade.abilityName;
         ability.price.text = "Price : " + upgrade.price.ToString();
+        ability.realPrice = upgrade.price;
         ability.description.text = upgrade.description;
         ability.rarity.text = "Chance : " + upgrade.rarityPourcentage.ToString();
 

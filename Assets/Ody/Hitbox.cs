@@ -33,7 +33,7 @@ public class Hitbox : MonoBehaviour
             {
                 other.GetComponent<EnemyManager>().TakeDamage(damage);
                 other.GetComponent<EnemyManager>().automata.ChangeState("DamageState");
-                other.GetComponent<Rigidbody>().linearVelocity = PlayerManager.Instance.model.right * pushForce/3;
+                other.GetComponent<Rigidbody>().linearVelocity = PlayerManager.Instance.model.right * pushForce/1.2f;
                 CameraRoot.Instance.ShakeCam();
                 if (doFreeze)
                 {

@@ -8,7 +8,7 @@ public class Door : MonoBehaviour
 
     public bool chunks;
     public bool shop;
-    public bool life;
+    public bool challenge;
 
 
     public PlayerInput playerInput;
@@ -40,13 +40,13 @@ public class Door : MonoBehaviour
         print("door" + doorDict["Left"]);
         if(Generator.Instance.z == 0)
         {
-            doorText.text = "Combat Room";
+            doorText.text = "Challenge Room";
             if(Generator.Instance.roomsBeforeBoss <= 1)
             {
                 doorText.text = "Boss Room";
                 doorText.color = Color.red;
             }
-            chunks = true;
+            challenge = true;
             Generator.Instance.z++;
             return;
         }
@@ -76,13 +76,13 @@ public class Door : MonoBehaviour
         }
         if (Generator.Instance.z == 3)
         {
-            doorText.text = "Life Room";
+            doorText.text = "Challenge Room";
             if (Generator.Instance.roomsBeforeBoss <= 1)
             {
                 doorText.text = "Boss Room";
                 doorText.color = Color.red;
             }
-            life = true;
+            challenge = true;
             Generator.Instance.z++;
             return;
         }
@@ -129,6 +129,10 @@ public class Door : MonoBehaviour
             if (shop)
             {
                 Generator.Instance.StartCoroutine("PlaceShop");
+            }
+            if (challenge)
+            {
+                Generator.Instance.StartCoroutine("PlaceChallenge");
             }
         }
     }

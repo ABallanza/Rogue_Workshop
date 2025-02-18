@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1691409467761468016}
+  - component: {fileID: 7693992825472227614}
   m_Layer: 10
   m_Name: Claw_1
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 1786061214793870481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7693992825472227614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508526601137679511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac575795c094c0b4fa1795888bba991c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDestroy: 2
 --- !u!1001 &6157969820760233945
 PrefabInstance:
   m_ObjectHideFlags: 0

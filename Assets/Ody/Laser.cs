@@ -14,6 +14,19 @@ public class Laser : MonoBehaviour
 
     private float laserLength;
 
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Hitbox>())
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+
+        
     public void Start()
     {
         laserLength = laser.transform.localScale.y;

@@ -13,6 +13,8 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private Transform frontObj;
 
+    public Animator anims;
+
     public float speed = 5;
 
     bool hasRotate = false;
@@ -40,6 +42,8 @@ public class EnemyMovement : MonoBehaviour
                 automata.ChangeState("FightingState");
             }
         }
+
+        anims.SetBool("isMoving", rb.linearVelocity.magnitude > 0.2f);
     }
 
 

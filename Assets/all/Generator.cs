@@ -60,6 +60,9 @@ public class Generator : MonoBehaviour
     [Header("Shop")]
     public GameObject shop;
 
+    [Header("Challenge")]
+    public GameObject challengeRoom;
+
     [Header("End Game")]
     public int roomsBeforeBoss = 5;
     public GameObject bossRoom;
@@ -229,6 +232,26 @@ public class Generator : MonoBehaviour
         yield return new WaitForSeconds(1f);
         GenerateShop();
     }
+
+    public IEnumerator PlaceChallenge()
+    {
+        Reset();
+        yield return new WaitForSeconds(1f);
+        GenerateChallenge();
+    }
+
+
+    void GenerateChallenge()
+    {
+        GameObject s = Instantiate(challengeRoom, Vector3.zero, Quaternion.identity);
+        s.transform.SetParent(transform);
+        if (!spawnedPlayer)
+        {
+            spawnedPlayer = true;
+            Instantiate(player, Vector3.zero, Quaternion.identity);
+        }
+    }
+
 
     void GenerateShop()
     {

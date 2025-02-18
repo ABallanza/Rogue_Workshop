@@ -1,0 +1,82 @@
+using System.Collections;
+using UnityEngine;
+
+public class Challenge : MonoBehaviour
+{
+
+    public GameObject[] spawnPoints;
+
+    int waveNumber;
+
+    public GameObject[] wave_1;
+    public GameObject[] wave_2;
+    public GameObject[] wave_3;
+
+
+    public GameObject endDoor;
+
+    public GameObject[] enemies;
+
+    public void Start()
+    {
+        StartWave();
+        GameObject.Find("Player").GetComponent<Rigidbody>().position = transform.position;
+    }
+
+    void StartWave()
+    {
+        waveNumber++;
+        
+        if(waveNumber == 1)
+        {
+            foreach (GameObject GO in wave_1)
+            {
+                Instantiate(GO, spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position, Quaternion.identity);
+            }
+        }
+        if(waveNumber == 2)
+        {
+            foreach (GameObject GO in wave_2)
+            {
+                Instantiate(GO, spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position, Quaternion.identity);
+            }
+        }
+        if(waveNumber == 3)
+        {
+            foreach (GameObject GO in wave_3)
+            {
+                Instantiate(GO, spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position, Quaternion.identity);
+            }
+        }
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        StartCoroutine("CheckEndWave");
+    }
+
+    public IEnumerator CheckEndWave()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            // Dynamically update the enemies list
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            if (enemies.Length == 0)
+            {
+                if (waveNumber < 3)
+                {
+                    StartWave();
+                }
+                else
+                {
+                    endDoor.SetActive(true);
+                }
+                yield break; // Exit the coroutine once the wave is over
+            }
+        }
+    }
+
+
+
+}

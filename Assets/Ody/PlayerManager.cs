@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Ground Settings")]
     public bool isGrounded;
-    [SerializeField] private Transform groundCheck;
+    public Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundDistance = 0.2f;
     [SerializeField] private Collider groundCol;
@@ -47,6 +47,7 @@ public class PlayerManager : MonoBehaviour
     private bool canDash = true;
     public float dashTime = 0.2f;
     public float timeToDashAgain = 3f;
+    public Image dashSlider;
 
     [Header("Gun Settings")]
     public float fireRate = 0.5f;
@@ -76,10 +77,27 @@ public class PlayerManager : MonoBehaviour
         if (canDash)
         {
             canDash = false;
+            dashSlider.fillAmount = 1; // Set the UI fill amount to full
             Automata.Instance.ChangeState("DashState");
-            StartCoroutine(CanDashAgain());
+            StartCoroutine(DashCooldown());
         }
     }
+
+    IEnumerator DashCooldown()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < timeToDashAgain)
+        {
+            dashSlider.fillAmount = 1 - (elapsedTime / timeToDashAgain); // Reduce fill amount over time
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        dashSlider.fillAmount = 0; // Ensure it's fully depleted
+        canDash = true;
+    }
+
 
     IEnumerator CanDashAgain()
     {

@@ -9,6 +9,7 @@ public class Ability : MonoBehaviour
     public Text price;
     public Text description;
     public Text rarity;
+    public int realPrice;
 
     [Header("Boost")]
     [HideInInspector] public float meleeDamageBoost = 0;
@@ -21,13 +22,21 @@ public class Ability : MonoBehaviour
 
     public void Use()
     {
-        PlayerManager.Instance.meleeDamage += meleeDamageBoost;
-        PlayerManager.Instance.bulletDamage += bulletDamageBoost;
-        PlayerManager.Instance.fireRate -= fireRateBoost;
-        PlayerManager.Instance.speed += speedBoost;
-        PlayerManager.Instance.AddLife(lifeBoost);
-        PlayerManager.Instance.dashForce += dashForceBoost;
+        if(PlayerManager.Instance.shards >= realPrice)
+        {
+            PlayerManager.Instance.shards -= realPrice;
+            PlayerManager.Instance.meleeDamage += meleeDamageBoost;
+            PlayerManager.Instance.bulletDamage += bulletDamageBoost;
+            PlayerManager.Instance.fireRate -= fireRateBoost;
+            PlayerManager.Instance.speed += speedBoost;
+            PlayerManager.Instance.AddLife(lifeBoost);
+            PlayerManager.Instance.dashForce += dashForceBoost;
 
-        GetComponentInParent<Chest>().CloseShop();
+            GetComponentInParent<Chest>().CloseShop();
+        }
+        else
+        {
+            GetComponentInParent<Chest>().CloseShop();
+        }
     }
 }

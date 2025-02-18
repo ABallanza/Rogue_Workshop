@@ -15,6 +15,8 @@ public class MovementState : MonoBehaviour
     private Vector3 lastWallJumpDir;
     private float wallJumpCooldown = 0.5f;
 
+    public GameObject jumpEffect;
+
     private void OnEnable()
     {
         playerInput = new PlayerInput();
@@ -25,6 +27,8 @@ public class MovementState : MonoBehaviour
 
         playerInput.Player.Attack.performed += ctx => StartFight();
         playerInput.Player.Dash.performed += ctx => PlayerManager.Instance.Dash();
+
+        canMoveTowardsWall = true;
     }
 
     private void OnDisable()
@@ -55,11 +59,13 @@ public class MovementState : MonoBehaviour
         {
             anims.SetTrigger("Jump");
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z); // Set Y velocity directly
+            Instantiate(jumpEffect, PlayerManager.Instance.groundCheck.position, Quaternion.identity);
         }
         else if (PlayerManager.Instance.wallJump && !PlayerManager.Instance.isGrounded)
         {
             // Wall Jump
             lastWallJumpDir = PlayerManager.Instance.dir.normalized;
+            Instantiate(jumpEffect, PlayerManager.Instance.groundCheck.position, Quaternion.identity);
             rb.linearVelocity = new Vector3(-lastWallJumpDir.x * 6f, jumpForce + 5, rb.linearVelocity.z); // Apply controlled wall jump force
 
             StartCoroutine(WallJumpCooldown());

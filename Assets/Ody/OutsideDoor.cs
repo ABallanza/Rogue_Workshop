@@ -10,6 +10,8 @@ public class OutsideDoor : MonoBehaviour
 
     bool isIn = false;
 
+    public bool tpPlayer = true;
+
     private void OnEnable()
     {
         playerInput = new PlayerInput();
@@ -58,6 +60,9 @@ public class OutsideDoor : MonoBehaviour
     IEnumerator TeleportPlayer()
     {
         yield return new WaitForSeconds(1f);
-        GameObject.Find("Player").GetComponent<Rigidbody>().position = startPos.position;
+        if (tpPlayer)
+        {
+            GameObject.Find("Player").GetComponent<Rigidbody>().position = startPos.position;
+        }
     }
 }
