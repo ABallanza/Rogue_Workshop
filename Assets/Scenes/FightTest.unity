@@ -119,37 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &118233924
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 118233925}
-  m_Layer: 9
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &118233925
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118233924}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.485, y: 0.176, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1769253633}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &212998067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,11 +2593,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1769253633 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3476922491605013815, guid: 985f1461670211343ab7f97336685b5b, type: 3}
-  m_PrefabInstance: {fileID: 5087801965095630951}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1792026339
 GameObject:
   m_ObjectHideFlags: 0
@@ -3095,10 +3059,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2907665928566741564, guid: 217964d3aa4a5c34a805528781ec4f95, type: 3}
-      propertyPath: shardsToGive
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4914913269566351983, guid: 217964d3aa4a5c34a805528781ec4f95, type: 3}
       propertyPath: m_Name
       value: 'Enemy [ SHOOT ]'
@@ -3213,25 +3173,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1044197160685389347, guid: 985f1461670211343ab7f97336685b5b, type: 3}
-      propertyPath: shardsToGive
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 2777215575032147226, guid: 985f1461670211343ab7f97336685b5b, type: 3}
       propertyPath: m_Name
       value: 'Enemy [ MELEE ]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2777215575032147226, guid: 985f1461670211343ab7f97336685b5b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6195340727496975653, guid: 985f1461670211343ab7f97336685b5b, type: 3}
-      propertyPath: frontObj
-      value: 
-      objectReference: {fileID: 118233925}
-    - target: {fileID: 6195340727496975653, guid: 985f1461670211343ab7f97336685b5b, type: 3}
-      propertyPath: ground.m_Bits
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9007020909782601267, guid: 985f1461670211343ab7f97336685b5b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3275,10 +3219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3476922491605013815, guid: 985f1461670211343ab7f97336685b5b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 118233925}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 985f1461670211343ab7f97336685b5b, type: 3}
 --- !u!1001 &9125835160950030406
@@ -3292,10 +3233,6 @@ PrefabInstance:
     - target: {fileID: 1686147761793746856, guid: 0102337a24860e24f8c5fd46ac94d48f, type: 3}
       propertyPath: m_Name
       value: 'Enemy [ FLY ]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1686147761793746856, guid: 0102337a24860e24f8c5fd46ac94d48f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8731503489603716922, guid: 0102337a24860e24f8c5fd46ac94d48f, type: 3}
       propertyPath: m_LocalPosition.x

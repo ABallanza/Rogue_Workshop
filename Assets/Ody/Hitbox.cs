@@ -29,13 +29,24 @@ public class Hitbox : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            other.GetComponent<EnemyManager>().TakeDamage(damage);
-            other.GetComponent<EnemyManager>().automata.ChangeState("DamageState");
-            other.GetComponent<Rigidbody>().linearVelocity = PlayerManager.Instance.model.right * pushForce;
-            CameraRoot.Instance.ShakeCam();
-            if (doFreeze)
+            if (other.GetComponent<EnemyManager>())
             {
-                StartCoroutine(Freeze());
+                other.GetComponent<EnemyManager>().TakeDamage(damage);
+                other.GetComponent<EnemyManager>().automata.ChangeState("DamageState");
+                other.GetComponent<Rigidbody>().linearVelocity = PlayerManager.Instance.model.right * pushForce;
+                CameraRoot.Instance.ShakeCam();
+                if (doFreeze)
+                {
+                    StartCoroutine(Freeze());
+                }
+            }
+        }
+        if(other.tag == "Enemy")
+        {
+            if (other.GetComponent<BossDamageZone>())
+            {
+                other.GetComponent<BossDamageZone>().TakeDamage(damage);
+                CameraRoot.Instance.ShakeCam();
             }
         }
     }
