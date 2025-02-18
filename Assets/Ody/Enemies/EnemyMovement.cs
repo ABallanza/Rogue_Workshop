@@ -11,6 +11,10 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private Transform model;
 
+    [SerializeField] private Transform frontObj;
+
+    public float speed = 5;
+
     bool hasRotate = false;
     int rot = 0;
 
@@ -22,8 +26,13 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
+    public bool canGo;
+    public LayerMask ground;
+
     private void Update()
     {
+        canGo = Physics.CheckSphere(frontObj.position, 0.1f, ground);
+
         if (Vector3.Distance(transform.position, GameObject.Find("Player").transform.position) < 15)
         {
             if(Mathf.Abs(transform.position.y - GameObject.Find("Player").transform.position.y) < 1)
@@ -37,9 +46,9 @@ public class EnemyMovement : MonoBehaviour
 
     public void CheckForward()
     {
-        if (CanGoForward())
+        if (CanGoForward() && !canGo)
         {
-            rb.linearVelocity = model.right * -5;
+            rb.linearVelocity = model.right * - speed / 5;
         }
         else
         {
@@ -74,5 +83,6 @@ public class EnemyMovement : MonoBehaviour
         }
         return false;
     }
+
 
 }

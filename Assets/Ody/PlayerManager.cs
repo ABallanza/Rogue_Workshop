@@ -9,6 +9,10 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
+    [Header("Moneyy")]
+    public int shards;
+    public Text shardsText;
+
     public PlayerInput playerInput;
 
     [Header("Variables")]
@@ -210,6 +214,8 @@ public class PlayerManager : MonoBehaviour
         RotateModel();
 
         Vault();
+
+        shardsText.text = shards.ToString();
     }
 
     void Vault()

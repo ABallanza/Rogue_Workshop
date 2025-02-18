@@ -1,14 +1,19 @@
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
 
+
+
     public Text meleeText;
     public Text bulletText;
     public Text speedText;
     public Text fireRate;
     public Text dashForce;
+
+
 
     private void Update()
     {
