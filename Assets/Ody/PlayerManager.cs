@@ -130,6 +130,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    [Header("Death")]
+    public GameObject deathCam;
+    public GameObject states;
+    public GameObject deadCanvas;
+
 
     public Animator openclose;
 
@@ -148,6 +153,13 @@ public class PlayerManager : MonoBehaviour
                 heartList.RemoveAt(heartList.Count - 1);
                 Destroy(lastHeart);
                 life -= 1;
+                if(life <= 0)
+                {
+                    states.SetActive(false);
+                    deathCam.SetActive(true);
+                    GetComponentInChildren<Animator>().Play("Death");
+                    deadCanvas.SetActive(true);
+                }
             }
         }
     }

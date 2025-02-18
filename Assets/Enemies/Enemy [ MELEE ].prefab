@@ -419,7 +419,7 @@ Rigidbody:
   m_GameObject: {fileID: 2777215575032147226}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: 287909979623073810}
   automata: {fileID: 7926208367766248685}
-  distanceToHit: 2
+  distanceToHit: 3
   timeBetweenHits: 1
   anims: {fileID: 5890352787699351632}
 --- !u!1 &6660019000157356585

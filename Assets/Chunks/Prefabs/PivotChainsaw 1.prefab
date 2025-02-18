@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8482787998873311624}
   - component: {fileID: 8216313580495613781}
   - component: {fileID: 6554793541504223536}
+  - component: {fileID: 6200890392532044083}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5891553688754435065}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -2.4789596, y: -0.0045351177, z: 2.2232816}
+  m_LocalPosition: {x: -2.4789596, y: -0.0045351177, z: 0}
   m_LocalScale: {x: 1, y: 0.024999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102,7 +103,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -110,6 +111,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &6200890392532044083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891553688754435065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244fb2671dd11184c9f3a785a93565c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7594120301047696074
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 7594120301047696074}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9824314, y: -0.007305689, z: 2.2232816}
+  m_LocalPosition: {x: -0.9824314, y: -0.007305689, z: 0}
   m_LocalScale: {x: 2, y: 0.099999994, z: 0.049999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -227,6 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3981210677128292855}
+  - component: {fileID: 7669232764523591796}
   m_Layer: 0
   m_Name: PivotChainsaw 1
   m_TagString: Untagged
@@ -242,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8227830540822707144}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.00000020861623, w: -1}
+  m_LocalRotation: {x: 0, y: -0, z: 0, w: -1}
   m_LocalPosition: {x: 6.4824314, y: 6.5073056, z: -1.6732817}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -251,3 +265,17 @@ Transform:
   - {fileID: 3162375285659451406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -360}
+--- !u!114 &7669232764523591796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8227830540822707144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847b4fe01ddf1574bbff93789d765f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clockWise: 0
+  speeeeeeeeeeed: 5
