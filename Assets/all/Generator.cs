@@ -6,6 +6,7 @@ using Unity.Properties;
 using UnityEditor;
 using UnityEngine.Rendering;
 using System.Linq;
+using UnityEngine.ProBuilder.Shapes;
 
 public class Generator : MonoBehaviour
 {
@@ -228,16 +229,34 @@ public class Generator : MonoBehaviour
 
     public IEnumerator PlaceShop()
     {
-        Reset();
-        yield return new WaitForSeconds(1f);
-        GenerateShop();
+        if (roomsBeforeBoss > 0)
+        {
+            Reset();
+            yield return new WaitForSeconds(1f);
+            GenerateShop();
+        }
+        else
+        {
+            Reset();
+            yield return new WaitForSeconds(1f);
+            CreateBoss();
+        }
     }
 
     public IEnumerator PlaceChallenge()
     {
-        Reset();
-        yield return new WaitForSeconds(1f);
-        GenerateChallenge();
+        if (roomsBeforeBoss > 0)
+        {
+            Reset();
+            yield return new WaitForSeconds(1f);
+            GenerateChallenge();
+        }
+        else
+        {
+            Reset();
+            yield return new WaitForSeconds(1f);
+            CreateBoss();
+        }
     }
 
 
