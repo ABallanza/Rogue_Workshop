@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2706373679573923918}
   - component: {fileID: 5900687812586924689}
   - component: {fileID: 3864365777298737345}
+  - component: {fileID: 1546720493633950747}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -151,6 +152,23 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &1546720493633950747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912605891198615468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecaf2be8c921a7344a78ceabbee82e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bunker: {fileID: 2100000, guid: ad2785d833e65fb4fbb7cbc27719d1a9, type: 2}
+  jungle: {fileID: 2100000, guid: 4b259bc94459a374fb98780500959e17, type: 2}
+  recolored:
+  - {fileID: 8366019404685775522}
+  - {fileID: 7683993915243822677}
 --- !u!1 &7683993915243822677
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +198,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 7.883, z: 0}
-  m_LocalScale: {x: 16, y: 0.2344, z: 5}
+  m_LocalScale: {x: 16, y: 0.2344, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8799937817697857781}
@@ -216,7 +234,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b259bc94459a374fb98780500959e17, type: 2}
+  - {fileID: 2100000, guid: ad2785d833e65fb4fbb7cbc27719d1a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -288,7 +306,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 3.8802, z: 0}
-  m_LocalScale: {x: 16, y: 7.76, z: 5}
+  m_LocalScale: {x: 16, y: 7.76, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8799937817697857781}
@@ -324,7 +342,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b259bc94459a374fb98780500959e17, type: 2}
+  - {fileID: 2100000, guid: ad2785d833e65fb4fbb7cbc27719d1a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
