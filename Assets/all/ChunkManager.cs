@@ -81,7 +81,7 @@ public class ChunkManager : MonoBehaviour
         }
         else
         {
-            GameObject newRoom = gen.doorRoomsBunker[Random.Range(0, gen.doorRoomsBunker.Length)];
+            GameObject newRoom = gen.isBunker ? gen.doorRoomsBunker[0] : gen.doorRoomsJungle[0];
             GameObject door = Instantiate(newRoom, transform.position, Quaternion.identity);
             door.GetComponentInChildren<Door>().doorDict[doorKey] = true;
             door.transform.SetParent(transform);
