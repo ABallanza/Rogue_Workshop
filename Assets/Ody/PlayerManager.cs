@@ -186,6 +186,8 @@ public class PlayerManager : MonoBehaviour
         openclose.Play("Close");
     }
 
+    bool isDead = false;
+
     public void TakeDamage(int damage)
     {
         for (int i = 0; i < damage; i++)
@@ -196,15 +198,23 @@ public class PlayerManager : MonoBehaviour
                 heartList.RemoveAt(heartList.Count - 1);
                 Destroy(lastHeart);
                 life -= 1;
-                if(life <= 0)
+                if(life <= 0 && !isDead)
                 {
+                    isDead = true;
                     states.SetActive(false);
                     deathCam.SetActive(true);
                     GetComponentInChildren<Animator>().Play("Death");
                     deadCanvas.SetActive(true);
+                    StartCoroutine("Dead");
                 }
             }
         }
+    }
+
+    public IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(4f);
+        Application.LoadLevel("Hub");
     }
 
     private void Start()
