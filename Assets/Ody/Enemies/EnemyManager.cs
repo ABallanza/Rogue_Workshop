@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
 
     [Range(0, 10)] public int shardsToGive;
 
+    [Range(0, 100)] public int chanceToDropGem;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +25,14 @@ public class EnemyManager : MonoBehaviour
         life -= damage;
         if(life <= 0)
         {
-            PlayerManager.Instance.shards += shardsToGive;
+            PlayerManager.Instance.AddShard("SHARD", shardsToGive.ToString(), shardsToGive);
+
+            int i = Random.Range(0, 100);
+            if(i <= chanceToDropGem)
+            {
+                PlayerManager.Instance.AddGem("Gem", "1");
+            }
+
             Destroy(gameObject);
         }
     }

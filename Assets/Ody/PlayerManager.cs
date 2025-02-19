@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Moneyy")]
     public int shards;
     public Text shardsText;
+    public Text gemText;
 
     public PlayerInput playerInput;
 
@@ -56,6 +57,26 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Vault Settings")]
     public Transform vaultPos;
+
+    [Header("Adder")]
+    public Transform layout;
+    public GameObject shardAdder;
+    public GameObject gemAdder;
+
+
+    public void AddShard(string name, string price, int number)
+    {
+        shards += number;
+        GameObject t = Instantiate(shardAdder, layout);
+        t.GetComponent<Shard>().SetInfo(name, price);
+    }
+
+    public void AddGem(string name, string price)
+    {
+        PlayerPrefs.SetInt("Gem", PlayerPrefs.GetInt("Gem") + 1);
+        GameObject t = Instantiate(gemAdder, layout);
+        t.GetComponent<Shard>().SetInfo(name, price);
+    }
 
     public void AddLife(int number)
     {
@@ -188,7 +209,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        AddLife(10);
+        AddLife(10 + PlayerPrefs.GetInt("Life"));
     }
 
     private void OnEnable()
@@ -234,6 +255,8 @@ public class PlayerManager : MonoBehaviour
         Vault();
 
         shardsText.text = shards.ToString();
+
+        gemText.text = PlayerPrefs.GetInt("Gem").ToString();
     }
 
     void Vault()

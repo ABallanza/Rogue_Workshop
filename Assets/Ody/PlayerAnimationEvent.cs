@@ -7,7 +7,16 @@ using UnityEngine.UI;
 public class PlayerAnimationEvent : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    
+
+
+
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey("Gem"))
+        {
+            PlayerPrefs.SetInt("Gem", 0);
+        }
+    }
 
 
     public void Push(float force)
