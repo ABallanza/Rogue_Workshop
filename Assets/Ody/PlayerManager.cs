@@ -188,27 +188,40 @@ public class PlayerManager : MonoBehaviour
 
     bool isDead = false;
 
+    bool canTakeDamage = true;
+
     public void TakeDamage(int damage)
     {
-        for (int i = 0; i < damage; i++)
+        if (canTakeDamage)
         {
-            if (life > 0 && heartList.Count > 0)
+            canTakeDamage = false;
+            StartCoroutine("TakeDamageAgain");
+            for (int i = 0; i < damage; i++)
             {
-                GameObject lastHeart = heartList[heartList.Count - 1];
-                heartList.RemoveAt(heartList.Count - 1);
-                Destroy(lastHeart);
-                life -= 1;
-                if(life <= 0 && !isDead)
+                if (life > 0 && heartList.Count > 0)
                 {
-                    isDead = true;
-                    states.SetActive(false);
-                    deathCam.SetActive(true);
-                    GetComponentInChildren<Animator>().Play("Death");
-                    deadCanvas.SetActive(true);
-                    StartCoroutine("Dead");
+                    GameObject lastHeart = heartList[heartList.Count - 1];
+                    heartList.RemoveAt(heartList.Count - 1);
+                    Destroy(lastHeart);
+                    life -= 1;
+                    if (life <= 0 && !isDead)
+                    {
+                        isDead = true;
+                        states.SetActive(false);
+                        deathCam.SetActive(true);
+                        GetComponentInChildren<Animator>().Play("Death");
+                        deadCanvas.SetActive(true);
+                        StartCoroutine("Dead");
+                    }
                 }
             }
         }
+    }
+
+    IEnumerator TakeDamageAgain()
+    {
+        yield return new WaitForSeconds(0.3f);
+        canTakeDamage = true;
     }
 
     public IEnumerator Dead()

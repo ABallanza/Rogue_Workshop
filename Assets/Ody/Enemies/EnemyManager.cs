@@ -33,6 +33,7 @@ public class EnemyManager : MonoBehaviour
                 PlayerManager.Instance.AddGem("Gem", "1");
             }
 
+            Gun.Instance.Kill();
             Destroy(gameObject);
         }
     }

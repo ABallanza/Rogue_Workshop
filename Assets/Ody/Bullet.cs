@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
 
     public bool isPlayer = false;
 
+    public bool isPower = false;
+    public GameObject power;
 
     void Update()
     {
@@ -29,6 +31,10 @@ public class Bullet : MonoBehaviour
         {
             if (other.tag == "Enemy")
             {
+                if (isPower)
+                {
+                    Instantiate(power, transform.position, Quaternion.identity);
+                }
                 Destroy(gameObject);
             }
         }

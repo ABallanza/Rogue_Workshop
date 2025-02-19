@@ -1,8 +1,19 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
+
+    public static Gun Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
     public GameObject bullet;
     public Transform shootPoint;
     public GameObject shootRot;
@@ -22,6 +33,8 @@ public class Gun : MonoBehaviour
 
         playerInput.Player.Shoot.performed += ctx => isShooting = true;
         playerInput.Player.Shoot.canceled += ctx => isShooting = false;
+
+        playerInput.Player.Hyperbullet.performed += ctx => PowerShoot();
     }
 
     private void OnDisable()
@@ -33,6 +46,30 @@ public class Gun : MonoBehaviour
 
         playerInput.Player.Shoot.performed -= ctx => isShooting = true;
         playerInput.Player.Shoot.canceled -= ctx => isShooting = false;
+
+        playerInput.Player.Hyperbullet.performed -= ctx => PowerShoot();
+    }
+
+
+    [Header("PowerBullet")]
+    public GameObject p_bullet;
+    public Image p_image;
+    public float p_value;
+
+
+    void PowerShoot()
+    {
+        if(p_value <= 0)
+        {
+            p_value = 1;
+            Instantiate(p_bullet, shootPoint.transform.position, shootPoint.transform.rotation);
+        }
+    }
+
+    public void Kill()
+    {
+        p_value -= 0.2f;
+        p_image.fillAmount = p_value;
     }
 
     void LockMove(int i)

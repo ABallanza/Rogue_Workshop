@@ -152,6 +152,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hyperbullet"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d1616d4-f292-4b0d-8bc8-8975425da447"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -702,6 +711,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2805265c-d4d8-4cc3-9075-974a83f1dbef"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hyperbullet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1303,6 +1323,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Interagir = m_Player.FindAction("Interagir", throwIfNotFound: true);
         m_Player_Options = m_Player.FindAction("Options", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Hyperbullet = m_Player.FindAction("Hyperbullet", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1396,6 +1417,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interagir;
     private readonly InputAction m_Player_Options;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Hyperbullet;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1414,6 +1436,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Interagir => m_Wrapper.m_Player_Interagir;
         public InputAction @Options => m_Wrapper.m_Player_Options;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Hyperbullet => m_Wrapper.m_Player_Hyperbullet;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1465,6 +1488,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @Hyperbullet.started += instance.OnHyperbullet;
+            @Hyperbullet.performed += instance.OnHyperbullet;
+            @Hyperbullet.canceled += instance.OnHyperbullet;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1511,6 +1537,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @Hyperbullet.started -= instance.OnHyperbullet;
+            @Hyperbullet.performed -= instance.OnHyperbullet;
+            @Hyperbullet.canceled -= instance.OnHyperbullet;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1707,6 +1736,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnInteragir(InputAction.CallbackContext context);
         void OnOptions(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnHyperbullet(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
