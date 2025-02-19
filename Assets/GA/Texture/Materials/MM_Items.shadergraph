@@ -4,16 +4,7 @@
     "m_ObjectId": "462a3085f13444448b18a918f4b6a084",
     "m_Properties": [
         {
-            "m_Id": "71635d62124b43f7a3c3df186cc59954"
-        },
-        {
             "m_Id": "6852b691c6764d4e961464f0d08c459c"
-        },
-        {
-            "m_Id": "77ee0c65ce744bdfa4cc4908a83e3b1d"
-        },
-        {
-            "m_Id": "b611f440ee3f42ae9a56ee513085c794"
         },
         {
             "m_Id": "30c6606aee2c4db4a6372a9d4db39d97"
@@ -179,8 +170,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -659.0000610351563,
-            "y": 227.00001525878907,
+            "x": -694.0,
+            "y": 223.00001525878907,
             "width": 114.0,
             "height": 33.99998474121094
         }
@@ -634,36 +625,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "71635d62124b43f7a3c3df186cc59954",
-    "m_Guid": {
-        "m_GuidSerialized": "d1df7546-e969-4bff-b501-d99562ed2073"
-    },
-    "m_Name": "MetalicSmoothness",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MetalicSmoothness",
-    "m_DefaultReferenceName": "_MetalicSmoothness",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"0b5936feb03fdcd43842b0377437ea95\",\"type\":3}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.SamplerStateMaterialSlot",
     "m_ObjectId": "73c1b641161f474b8233af0de7e2c0cb",
     "m_Id": 3,
@@ -673,36 +634,6 @@
     "m_ShaderOutputName": "Sampler",
     "m_StageCapability": 3,
     "m_BareResource": false
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "77ee0c65ce744bdfa4cc4908a83e3b1d",
-    "m_Guid": {
-        "m_GuidSerialized": "12237298-fbe6-4826-ba42-575fbb4793e3"
-    },
-    "m_Name": "Emissive",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Emissive",
-    "m_DefaultReferenceName": "_Emissive",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"6762609da7ece1a4e99553b69d710c92\",\"type\":3}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
 }
 
 {
@@ -718,36 +649,6 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "b611f440ee3f42ae9a56ee513085c794",
-    "m_Guid": {
-        "m_GuidSerialized": "042a7c73-9cbc-4f89-977c-46466b9fd8e4"
-    },
-    "m_Name": "Normal",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Normal",
-    "m_DefaultReferenceName": "_Normal",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"addcffb9a890a4646aa6e0febefdb700\",\"type\":3}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
 }
 
 {
@@ -782,16 +683,7 @@
     "m_Name": "",
     "m_ChildObjectList": [
         {
-            "m_Id": "b611f440ee3f42ae9a56ee513085c794"
-        },
-        {
-            "m_Id": "71635d62124b43f7a3c3df186cc59954"
-        },
-        {
             "m_Id": "6852b691c6764d4e961464f0d08c459c"
-        },
-        {
-            "m_Id": "77ee0c65ce744bdfa4cc4908a83e3b1d"
         },
         {
             "m_Id": "30c6606aee2c4db4a6372a9d4db39d97"
