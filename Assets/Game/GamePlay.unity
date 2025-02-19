@@ -754,8 +754,8 @@ MonoBehaviour:
   walls: {fileID: 1790397781341764411, guid: e25964cdff25b4f44b1610767caae2e1, type: 3}
   spawnedPlayer: 0
   player: {fileID: 3333729335225535706, guid: 9328802947f0ed544a9b81cc76aab221, type: 3}
-  columns: 8
-  chunksPerColumns: 4
+  columns: 5
+  chunksPerColumns: 3
   spacing: 16
   isOn: 0
   roomsBunker:
@@ -779,12 +779,32 @@ MonoBehaviour:
   - {fileID: 7915158134385224969, guid: 7e250938ad644a841973bd291142426f, type: 3}
   - {fileID: 7915158134385224969, guid: 1f5b4a2c29e20ad4d88e7cc5d48ef554, type: 3}
   - {fileID: 7915158134385224969, guid: fdf78cb84232b5e4d8eddb89a41f04b7, type: 3}
-  - {fileID: 7915158134385224969, guid: db7009d4df8b13349b647d7bb7f6f88f, type: 3}
   doorRoomsBunker:
-  - {fileID: 7915158134385224969, guid: c6fa51843d111f94cb5abdcdb4a4307d, type: 3}
-  roomsJungle: []
-  doorRoomsJungle: []
-  isBunker: 0
+  - {fileID: 7915158134385224969, guid: db7009d4df8b13349b647d7bb7f6f88f, type: 3}
+  roomsJungle:
+  - {fileID: 7915158134385224969, guid: a82960208080e52498f52fd2707ae95e, type: 3}
+  - {fileID: 7915158134385224969, guid: 90600b3d54a452a4f8f4a6db86007347, type: 3}
+  - {fileID: 7915158134385224969, guid: c22746bd2a1140240bbf55b137572a43, type: 3}
+  - {fileID: 7915158134385224969, guid: ae0f6d7fc9eddd94a8a9275afde7dc24, type: 3}
+  - {fileID: 7915158134385224969, guid: 52c131ecf2083754f809951ae346dbd7, type: 3}
+  - {fileID: 7915158134385224969, guid: f318da0de0cf8e8479bd15353b0141ab, type: 3}
+  - {fileID: 7915158134385224969, guid: bfcc344cf83a16441a83ec74ca1a3098, type: 3}
+  - {fileID: 7915158134385224969, guid: 385d4718417c455449be72692dd5ab1c, type: 3}
+  - {fileID: 7915158134385224969, guid: 6197a12904c4a7944bc21b4c273cf767, type: 3}
+  - {fileID: 7915158134385224969, guid: ef12652f7058ce04c89aff2fcf0cf77f, type: 3}
+  - {fileID: 7915158134385224969, guid: 17b5eb5feca92fa44a9d2c08d5496c18, type: 3}
+  - {fileID: 7915158134385224969, guid: cbf929314738ed54396c48de4b1c2e68, type: 3}
+  - {fileID: 7915158134385224969, guid: 5eca6c1e965f13a4190b7fa1de37a127, type: 3}
+  - {fileID: 7915158134385224969, guid: e57c43098fed66744bb5bb8b41f777c6, type: 3}
+  - {fileID: 7915158134385224969, guid: ae3ca2be0a50d66408831fd2742a4a1e, type: 3}
+  - {fileID: 7915158134385224969, guid: 842390b52a0e79842b64b5f306478a4d, type: 3}
+  - {fileID: 7915158134385224969, guid: 0531cb0bf1977f943b01dff956dedf66, type: 3}
+  - {fileID: 7915158134385224969, guid: 0cee80babb9c4d44eadbbe8093c51e18, type: 3}
+  - {fileID: 7915158134385224969, guid: 54fea20c49600274db80fda9c7f86a58, type: 3}
+  - {fileID: 7915158134385224969, guid: 909fb5c9a9dc83f49b7dca6b627b9ea5, type: 3}
+  doorRoomsJungle:
+  - {fileID: 7915158134385224969, guid: 94aae121016464940bd2a211dd303668, type: 3}
+  isBunker: 1
   totalRoomsIndex: 0
   outline: {fileID: 6471845152830019238, guid: 07a919f051162974881ccd13aa9b6963, type: 3}
   shop: {fileID: 3713256103388643368, guid: 85c5f4c2256d6c847aa8eeb88383068c, type: 3}

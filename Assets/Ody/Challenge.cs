@@ -15,6 +15,7 @@ public class Challenge : MonoBehaviour
     public int totalWaves = 1;
 
     public GameObject endDoor;
+    public GameObject[] redThings;
 
     public GameObject[] enemies;
 
@@ -76,6 +77,8 @@ public class Challenge : MonoBehaviour
                 else
                 {
                     endDoor.SetActive(true);
+                    redThings[0].SetActive(false);
+                    redThings[1].SetActive(false);
                 }
                 yield break; // Exit the coroutine once the wave is over
             }
